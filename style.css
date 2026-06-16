@@ -401,7 +401,6 @@ ul { list-style: none; }
   white-space: nowrap;
   padding-bottom: 0.2em;
   overflow: visible;
-  max-width: 14ch;
 }
 
 /* Name and tagline stylized "fire" effects */
@@ -414,8 +413,9 @@ ul { list-style: none; }
   -webkit-text-fill-color: transparent;
   color: transparent;
   background-size: 200% 100%;
-  line-height: 1.4;        /* Era 1 — dejaba sin espacio para los descendentes (g, p, y) */
-  padding-bottom: 0.2em;   /* Espacio extra para que no se corten */
+  line-height: 1.4;
+  padding-bottom: 0.2em;
+  white-space: nowrap;
 }
 
 .name-fire {
