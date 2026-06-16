@@ -303,7 +303,7 @@ ul { list-style: none; }
   align-items: center;
   padding: calc(5rem + 80px) var(--space-lg) var(--space-xl); /* 80px para que no tape el navbar */
   position: relative;
-  overflow: hidden;
+  overflow: visible; /* allow glow/descenders to render without clipping */
 }
 
 .hero-content {
@@ -335,6 +335,8 @@ ul { list-style: none; }
   font-weight: 300;
   margin-bottom: var(--space-lg);
   letter-spacing: 0.02em;
+  line-height: 1.6; /* increase to fully show descenders */
+  padding-bottom: 0.45rem;
 }
 
 /* Name and tagline stylized "fire" effects */
@@ -397,7 +399,7 @@ ul { list-style: none; }
   filter: blur(8.4px);
   opacity: 0.54;
   pointer-events: none;
-  z-index: -1;
+  z-index: -2; /* keep the glow behind text and avoid stacking anomalies */
   background-size: 200% 100%;
   animation: flame 1.2s linear infinite;
 }
