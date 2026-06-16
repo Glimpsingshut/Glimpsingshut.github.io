@@ -1049,10 +1049,51 @@ ul { list-style: none; }
   }
 
   .projects-grid {
-    grid-template-columns: 1fr; /* Una columna en móvil */
+    grid-template-columns: 1fr;
   }
 
   .contact-inner h2 {
     font-size: var(--font-size-2xl);
+  }
+
+  /* Secciones más fluidas en móvil — sin contraste de fondo tan marcado */
+  .about,
+  .contact,
+  .hobbies {
+    background-color: var(--color-bg);
+  }
+
+  /* Secciones con menos padding vertical en móvil */
+  .section {
+    padding: 3rem 0;
+  }
+
+  /* Carrusel en móvil: imagen arriba, texto abajo, más compacto */
+  .carousel-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .slide-image {
+    aspect-ratio: 16 / 9;
+  }
+
+  .slide-caption {
+    padding: 1.25rem;
+    gap: 0.5rem;
+  }
+
+  .carousel-btn {
+    top: 30%; /* Centrado en la imagen, no en el slide completo */
+  }
+
+  /* About grid en móvil */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Proyecto cards sin fondo extra en móvil */
+  .project-card {
+    border-radius: 12px;
   }
 }
