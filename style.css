@@ -70,11 +70,13 @@
 }
 
 html {
-  scroll-behavior: smooth; /* Scroll suave al hacer clic en los links del nav */
+  scroll-behavior: smooth;
   font-size: 16px;
+  overflow-x: hidden; /* Previene scroll horizontal en toda la página */
 }
 
 body {
+  overflow-x: hidden;
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
@@ -391,7 +393,6 @@ ul { list-style: none; }
 
 .hero-tagline {
   font-size: clamp(1rem, 2.2vw, 2.2rem);
-  white-space: nowrap;
   color: var(--color-text-muted);
   font-weight: 300;
   margin: 0 0 var(--space-lg);
