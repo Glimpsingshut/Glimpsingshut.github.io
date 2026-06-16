@@ -351,29 +351,55 @@ ul { list-style: none; }
 }
 
 .name-fire {
-  background-image: linear-gradient(90deg, #0074ff 0%, #0060d6 40%, #0047b3 100%);
-  text-shadow: 0 2px 8px rgba(0,116,255,0.45), 0 8px 30px rgba(0,80,160,0.12);
-  animation: flame 1.8s linear infinite, flicker 3s infinite;
+  background-image: linear-gradient(90deg, #00a4ff 0%, #0074ff 40%, #0047b3 100%);
+  text-shadow: 0 4px 14px rgba(0,164,255,0.62), 0 14px 44px rgba(0,100,200,0.22);
+  filter: drop-shadow(0 10px 30px rgba(0,140,255,0.18));
+  animation: flame 1.2s linear infinite, flicker 2.2s infinite;
+}
+.name-fire::before {
+  content: '';
+  position: absolute;
+  inset: -6px -12px -18px -12px;
+  background: linear-gradient(90deg, rgba(0,164,255,0.14), rgba(0,116,255,0.06), rgba(0,80,200,0.02));
+  filter: blur(18px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+  background-size: 200% 100%;
+  animation: flame 1.2s linear infinite;
 }
 .name-fire::after {
   content: '';
   position: absolute;
   left: 50%;
   top: 100%;
-  width: 8px;
-  height: 8px;
-  background: radial-gradient(circle, rgba(0,140,255,0.95) 0%, rgba(0,90,200,0.45) 40%, transparent 70%);
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle, rgba(0,200,255,0.95) 0%, rgba(0,120,200,0.5) 40%, transparent 70%);
   transform: translateX(-50%);
   border-radius: 50%;
-  filter: blur(4px);
+  filter: blur(6px);
   opacity: 0;
-  animation: ember 1.6s linear infinite;
+  animation: ember 1.2s linear infinite;
 }
 
 .tagline-fire {
-  background-image: linear-gradient(90deg, #7c3aed 0%, #8b5cf6 40%, #5b21b6 100%);
-  text-shadow: 0 2px 8px rgba(124,58,237,0.45), 0 8px 30px rgba(115,60,210,0.12);
-  animation: flame 1.8s linear infinite, flicker 3.2s infinite;
+  background-image: linear-gradient(90deg, #9b6cff 0%, #7c3aed 40%, #5b21b6 100%);
+  text-shadow: 0 4px 12px rgba(156,108,255,0.6), 0 12px 36px rgba(110,60,200,0.18);
+  filter: drop-shadow(0 8px 26px rgba(140,80,220,0.16));
+  animation: flame 1.2s linear infinite, flicker 2.6s infinite;
+}
+.tagline-fire::before {
+  content: '';
+  position: absolute;
+  inset: -4px -10px -12px -10px;
+  background: linear-gradient(90deg, rgba(155,108,255,0.12), rgba(124,58,237,0.06));
+  filter: blur(14px);
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+  background-size: 200% 100%;
+  animation: flame 1.2s linear infinite;
 }
 
 @keyframes flame {
