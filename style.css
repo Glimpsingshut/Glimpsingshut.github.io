@@ -477,10 +477,8 @@ ul { list-style: none; }
 }
 
 .hero-cta .btn-cv {
-  margin-left: auto;
   flex: 0 0 auto;
   width: fit-content;
-  margin-top: 0.4rem;
   align-self: center;
 }
 
