@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,13 +15,21 @@
   <!-- ===== NAVBAR ===== -->
   <!-- La barra de navegación fija en la parte superior -->
   <nav class="navbar">
-    <a href="#inicio" class="nav-logo">S.</a>
+    <a href="#inicio" class="nav-logo" aria-label="Home">
+      <svg viewBox="0 0 40 40" width="42" height="42" aria-hidden="true" class="logo-minimal">
+        <rect x="6" y="8" width="28" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+        <line x1="10" y1="14" x2="30" y2="14" stroke="currentColor" stroke-width="1" opacity="0.8" />
+        <path d="M 10 21 Q 13 18 16 21 T 22 21 T 28 21" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6" stroke-linecap="round" />
+      </svg>
+    </a>
     <ul class="nav-links">
       <li><a href="#sobre-mi">About me</a></li>
       <li><a href="#proyectos">Projects</a></li>
       <li><a href="#hobbies">Hobbies</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
+    <!-- Botón para cambiar entre modo oscuro y claro -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambiar tema"></button>
     <!-- Hamburger button for small screens (mobile) -->
     <button class="nav-toggle" aria-label="Open menu">
       <span></span><span></span><span></span>
@@ -51,7 +59,7 @@
           Contact me
         </a>
 
-        <a href="cv.pdf" download class="btn btn-ghost btn-cv" aria-label="Download CV">
+        <a href="../ucv/CV_Uriel_Arredondo.pdf" download class="btn btn-ghost btn-cv" aria-label="Download CV">
           <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
             <path fill="currentColor" d="M13 5h-2v8H8l4 4 4-4h-3V5z M5 19h14v2H5z"/>
           </svg>

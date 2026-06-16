@@ -2,7 +2,25 @@
 // SCRIPT.JS — Interactividad de la página
 // =============================================
 
-// ===== 1. MENÚ HAMBURGUESA (móvil) =====
+// ===== 1. TOGGLE DARK / LIGHT MODE =====
+// Guarda la preferencia en localStorage para que se recuerde al recargar
+
+const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+// Al cargar, revisa si el usuario ya eligió un tema antes
+const savedTheme = localStorage.getItem('theme') || 'dark';
+html.setAttribute('data-theme', savedTheme);
+
+themeToggle?.addEventListener('click', () => {
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
+
+
+// ===== 2. MENÚ HAMBURGUESA (móvil) — antes era 1 =====
 // Busca el botón y los links en el HTML
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks  = document.querySelector('.nav-links');
@@ -71,9 +89,8 @@ window.addEventListener('scroll', () => {
 
 const style = document.createElement('style');
 style.textContent = `
-  .navbar.scrolled {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  }
+  [data-theme="dark"] .navbar.scrolled  { box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
+  [data-theme="light"] .navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
 `;
 document.head.appendChild(style);
 
