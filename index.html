@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sherlin — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Google Fonts: cambia "Inter" por la fuente que más te guste -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <!-- La barra de navegación fija en la parte superior -->
+  <nav class="navbar">
+    <a href="#inicio" class="nav-logo">S.</a>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">About me</a></li>
+      <li><a href="#proyectos">Projects</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <!-- Hamburger button for small screens (mobile) -->
+    <button class="nav-toggle" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- ===== HERO (inicio) ===== -->
+  <!-- La primera sección que ve el visitante -->
+  <section id="inicio" class="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow fade-in">Hello, I'm</p>
+      <h1 class="hero-name fade-in">Uriel<br>Arredondo</h1>
+      <!-- Cambia este texto por tu rol/descripción -->
+      <p class="hero-tagline fade-in">Technology Consultant · Engineer</p>
+      <div class="hero-cta fade-in">
+        <a href="#proyectos" class="btn btn-primary">View projects</a>
+        <a href="#contact" class="btn btn-ghost">Contact me</a>
+        <a href="cv.pdf" download class="btn btn-ghost btn-cv">Download CV</a>
+      </div>
+    </div>
+    <!-- Elemento decorativo de fondo -->
+    <div class="hero-blob" aria-hidden="true"></div>
+  </section>
+
+  <!-- ===== SOBRE MÍ ===== -->
+  <section id="sobre-mi" class="about section">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Foto: reemplaza "images/foto.jpg" con tu propia imagen -->
+        <div class="about-image reveal">
+          <div class="image-wrapper">
+            <!-- Si no tienes foto aún, el placeholder gris se muestra solo -->
+            <img src="../Photos/Foto1.jpeg" alt="Foto de Sherlin"
+                 onerror="this.style.display='none'; this.parentElement.classList.add('placeholder')" />
+          </div>
+        </div>
+
+        <div class="about-text reveal">
+          <!--<span class="section-label">About</span> -->
+          <h2>About me</h2>
+          <!-- Customize this paragraph with your story -->
+          <p>
+            Technology Consultant focused on unlocking value from data, AI, and enterprise technology through scalable solutions and digital transformation initiatives.
+          <p>Currently, I support AI-powered products at Qualtrics, leading complex implementation and data migration initiatives within the Qualtrics XM Platform. I collaborate with enterprise clients, customer success, product teams, and engineers to modernize data ecosystems, accelerate platform adoption, and deliver scalable solutions that drive business outcomes.
+          </p>
+          <p>
+            Drawing from experience across systems engineering, enterprise support, and technology consulting, I bring a unique perspective to solving complex challenges. 
+           </p> 
+           <p>
+            I enjoy connecting technical possibilities with business needs, enabling organizations to adopt new technologies and maximize the value of their data.
+          </p>
+          <p>
+
+          </p>
+
+          <!-- Tus habilidades o intereses — agrega o quita los que quieras -->
+          <ul class="skills-list">
+            <li>Artificial Intelligence (AI)</li>
+            <li>Engineering</li>
+            <li>Enterprise Consulting and Support</li>
+            <li>Troubleshooting</li>
+            <li>Cross-team collaboration</li>
+            <li>Leadership and mentoring</li>
+            <li>Data Analysis</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROYECTOS ===== -->
+  <section id="proyectos" class="projects section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Work</span>
+        <h2>Projects</h2>
+      </div>
+
+      <!-- Cuadrícula de proyectos -->
+      <!-- Para agregar más proyectos: copia un bloque <article class="project-card"> y pégalo aquí -->
+      <div class="projects-grid">
+
+        <!-- Proyecto 1 -->
+        <article class="project-card reveal">
+          <!-- Imagen del proyecto: reemplaza la ruta con tu imagen -->
+          <div class="project-image">
+            <img src="images/proyecto1.jpg" alt="Proyecto 1"
+                 onerror="this.parentElement.classList.add('placeholder')" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">Category</span>
+            <h3>Project Name</h3>
+            <p>Short description of what you did, the problem and how you solved it.</p>
+            <!-- Agrega links reales cuando los tengas -->
+            <div class="project-links">
+              <a href="#" class="link-arrow">View project →</a>
+              <a href="#" class="link-arrow">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyecto 2 -->
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="images/proyecto2.jpg" alt="Proyecto 2"
+                 onerror="this.parentElement.classList.add('placeholder')" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">Category</span>
+            <h3>Project Name</h3>
+            <p>Short description of what you did, the problem and how you solved it.</p>
+            <div class="project-links">
+              <a href="#" class="link-arrow">View project →</a>
+              <a href="#" class="link-arrow">GitHub →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Proyecto 3 -->
+        <article class="project-card reveal">
+          <div class="project-image">
+            <img src="images/proyecto3.jpg" alt="Proyecto 3"
+                 onerror="this.parentElement.classList.add('placeholder')" />
+          </div>
+          <div class="project-info">
+            <span class="project-tag">Category</span>
+            <h3>Project Name</h3>
+            <p>Short description of what you did, the problem and how you solved it.</p>
+            <div class="project-links">
+              <a href="#" class="link-arrow">View project →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HOBBIES ===== -->
+  <!-- Carrusel de imágenes con tus hobbies e intereses personales -->
+  <section id="hobbies" class="hobbies section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Personal life</span>
+        <h2>What I'm passionate about</h2>
+        <p class="section-subtitle">Outside of work, these are the things that make me happy.</p>
+      </div>
+
+      <!-- CARRUSEL -->
+      <!-- Cada .carousel-slide es una diapositiva.
+           Para agregar más: copia un bloque <div class="carousel-slide"> y pégalo aquí. -->
+      <div class="carousel reveal">
+
+        <!-- Pista del carrusel: contenedor que se mueve horizontalmente -->
+        <div class="carousel-track">
+
+          <!-- Slide 1 -->
+          <!-- Para agregar tu imagen: pon el archivo en /images/ y cambia el src -->
+          <div class="carousel-slide">
+            <div class="slide-image">
+              <img src="images/hobby1.jpg" alt="Hobby 1"
+                   onerror="this.parentElement.classList.add('placeholder')" />
+            </div>
+            <div class="slide-caption">
+              <span class="slide-emoji">🎨</span>
+              <h3>Hobby name</h3>
+              <p>Short description of why you like it or what you enjoy about it.</p>
+            </div>
+          </div>
+
+          <!-- Slide 2 -->
+          <div class="carousel-slide">
+            <div class="slide-image">
+              <img src="images/hobby2.jpg" alt="Hobby 2"
+                   onerror="this.parentElement.classList.add('placeholder')" />
+            </div>
+            <div class="slide-caption">
+              <span class="slide-emoji">📚</span>
+              <h3>Hobby name</h3>
+              <p>Short description of why you like it or what you enjoy about it.</p>
+            </div>
+          </div>
+
+          <!-- Slide 3 -->
+          <div class="carousel-slide">
+            <div class="slide-image">
+              <img src="images/hobby3.jpg" alt="Hobby 3"
+                   onerror="this.parentElement.classList.add('placeholder')" />
+            </div>
+            <div class="slide-caption">
+              <span class="slide-emoji">🌿</span>
+              <h3>Hobby name</h3>
+              <p>Short description of why you like it or what you enjoy about it.</p>
+            </div>
+          </div>
+
+          <!-- Slide 4 -->
+          <div class="carousel-slide">
+            <div class="slide-image">
+              <img src="images/hobby4.jpg" alt="Hobby 4"
+                   onerror="this.parentElement.classList.add('placeholder')" />
+            </div>
+            <div class="slide-caption">
+              <span class="slide-emoji">✈️</span>
+              <h3>Hobby name</h3>
+              <p>Short description of why you like it or what you enjoy about it.</p>
+            </div>
+          </div>
+
+        </div><!-- /carousel-track -->
+
+        <!-- Botones de navegación izquierda / derecha -->
+        <button class="carousel-btn carousel-btn--prev" aria-label="Anterior">&#8592;</button>
+        <button class="carousel-btn carousel-btn--next" aria-label="Siguiente">&#8594;</button>
+
+        <!-- Puntos indicadores de posición -->
+        <div class="carousel-dots"></div>
+
+      </div><!-- /carousel -->
+    </div>
+  </section>
+
+  <!-- ===== CONTACTO ===== -->
+  <section id="contact" class="contact section">
+    <div class="container">
+      <div class="contact-inner reveal">
+        <span class="section-label">Contact</span>
+        <!--<h2>Open to new opportunities</h2>-->
+        <p>
+          If you have a project in mind, a question, or just want to say hi, send me a message.
+        </p>
+        <!-- Reemplaza TU_EMAIL con tu correo real -->
+        <a href="mailto:uarredondov@hotmail.com" class="btn btn-primary btn-large">
+          Send me a message
+        </a>
+
+        <!-- Links sociales -->
+        <div class="social-links">
+          <!-- Replace # with your LinkedIn URL -->
+          <a href="https://linkedin.com/in/urielav" target="_blank" rel="noopener">
+            LinkedIn
+            <span class="social-icon" aria-hidden="true">
+              <svg viewBox="0 0 34 34" width="20" height="20" aria-hidden="true">
+                <rect x="0" y="0" width="34" height="34" rx="8" fill="#0A66C2" />
+                <path fill="#ffffff" d="M11.18 12.8h3.1v10.45h-3.1V12.8zm1.55-4.35a1.8 1.8 0 100 3.6 1.8 1.8 0 000-3.6zm5.3 4.35h2.98v1.42h.04c.42-.8 1.43-1.65 2.95-1.65 3.16 0 3.74 2.08 3.74 4.78v5.9h-3.1v-5.22c0-1.25-.02-2.86-1.74-2.86-1.74 0-2.01 1.36-2.01 2.76v5.32h-3.1V12.8z" />
+              </svg>
+            </span>
+          </a>
+          <!-- Agrega o quita redes según lo que uses -->
+         <!-- <a href="https://github.com/tu-usuario" target="_blank" rel="noopener">GitHub</a> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Uriel Arredondo</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
