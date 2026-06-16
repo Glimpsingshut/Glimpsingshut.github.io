@@ -359,12 +359,12 @@ ul { list-style: none; }
 
 /* ===== HERO ===== */
 .hero {
-  min-height: 100vh;         /* Ocupa toda la pantalla */
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  padding: calc(3.5rem + 80px) var(--space-lg) calc(4rem + 24px); /* espaciado superior para navbar + espacio inferior */
+  padding: calc(3.5rem + 80px) var(--space-lg) calc(4rem + 24px);
   position: relative;
-  overflow: visible; /* allow glow/descenders to render without clipping */
+  overflow: hidden; /* Evita scroll horizontal por el blob decorativo */
 }
 
 .hero-content {
