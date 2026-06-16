@@ -352,17 +352,17 @@ ul { list-style: none; }
 
 .name-fire {
   background-image: linear-gradient(90deg, #00a4ff 0%, #0074ff 40%, #0047b3 100%);
-  text-shadow: 0 4px 14px rgba(0,164,255,0.62), 0 14px 44px rgba(0,100,200,0.22);
-  filter: drop-shadow(0 10px 30px rgba(0,140,255,0.18));
+  text-shadow: 0 2.4px 8.4px rgba(0,164,255,0.37), 0 8.4px 26.4px rgba(0,100,200,0.13);
+  filter: drop-shadow(0 6px 18px rgba(0,140,255,0.108));
   animation: flame 1.2s linear infinite, flicker 2.2s infinite;
 }
 .name-fire::before {
   content: '';
   position: absolute;
   inset: -6px -12px -18px -12px;
-  background: linear-gradient(90deg, rgba(0,164,255,0.14), rgba(0,116,255,0.06), rgba(0,80,200,0.02));
-  filter: blur(18px);
-  opacity: 0.9;
+  background: linear-gradient(90deg, rgba(0,164,255,0.084), rgba(0,116,255,0.036), rgba(0,80,200,0.012));
+  filter: blur(11px);
+  opacity: 0.54;
   pointer-events: none;
   z-index: -1;
   background-size: 200% 100%;
@@ -375,27 +375,27 @@ ul { list-style: none; }
   top: 100%;
   width: 10px;
   height: 10px;
-  background: radial-gradient(circle, rgba(0,200,255,0.95) 0%, rgba(0,120,200,0.5) 40%, transparent 70%);
+  background: radial-gradient(circle, rgba(0,200,255,0.57) 0%, rgba(0,120,200,0.30) 40%, transparent 70%);
   transform: translateX(-50%);
   border-radius: 50%;
-  filter: blur(6px);
+  filter: blur(3.6px);
   opacity: 0;
   animation: ember 1.2s linear infinite;
 }
 
 .tagline-fire {
   background-image: linear-gradient(90deg, #9b6cff 0%, #7c3aed 40%, #5b21b6 100%);
-  text-shadow: 0 4px 12px rgba(156,108,255,0.6), 0 12px 36px rgba(110,60,200,0.18);
-  filter: drop-shadow(0 8px 26px rgba(140,80,220,0.16));
+  text-shadow: 0 2.4px 7.2px rgba(156,108,255,0.36), 0 7.2px 21.6px rgba(110,60,200,0.108);
+  filter: drop-shadow(0 4.8px 15.6px rgba(140,80,220,0.096));
   animation: flame 1.2s linear infinite, flicker 2.6s infinite;
 }
 .tagline-fire::before {
   content: '';
   position: absolute;
   inset: -4px -10px -12px -10px;
-  background: linear-gradient(90deg, rgba(155,108,255,0.12), rgba(124,58,237,0.06));
-  filter: blur(14px);
-  opacity: 0.9;
+  background: linear-gradient(90deg, rgba(155,108,255,0.072), rgba(124,58,237,0.036));
+  filter: blur(8.4px);
+  opacity: 0.54;
   pointer-events: none;
   z-index: -1;
   background-size: 200% 100%;
