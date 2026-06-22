@@ -20,6 +20,31 @@ themeToggle?.addEventListener('click', () => {
 });
 
 
+// ===== 2. NAV PILL HIGHLIGHT =====
+(function () {
+  const pill  = document.querySelector('.nav-pill');
+  const links = document.querySelectorAll('.nav-links a');
+  const nav   = document.querySelector('.nav-links');
+  if (!pill || !links.length || !nav) return;
+
+  function moveTo(el) {
+    const navRect  = nav.getBoundingClientRect();
+    const linkRect = el.getBoundingClientRect();
+    pill.style.opacity   = '1';
+    pill.style.width     = linkRect.width + 'px';
+    pill.style.transform = `translateX(${linkRect.left - navRect.left - 6}px)`;
+  }
+
+  links.forEach(a => {
+    a.addEventListener('mouseenter', () => moveTo(a));
+  });
+
+  nav.addEventListener('mouseleave', () => {
+    pill.style.opacity = '0';
+  });
+})();
+
+
 // ===== 2. MENÚ HAMBURGUESA (móvil) — antes era 1 =====
 // Busca el botón y los links en el HTML
 const navToggle = document.querySelector('.nav-toggle');
