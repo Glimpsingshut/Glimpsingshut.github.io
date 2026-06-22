@@ -346,6 +346,31 @@ ul { list-style: none; }
   box-shadow: 0 4px 18px rgba(124,111,255,0.2);
 }
 
+/* Shimmer morado */
+.btn-contact::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(180,160,255,0.2) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: btn-shimmer-purple 4s ease-in-out infinite 0.9s;
+  pointer-events: none;
+}
+
+@keyframes btn-shimmer-purple {
+  0%        { left: -75%; opacity: 0; }
+  10%       { opacity: 1; }
+  40%, 100% { left: 130%; opacity: 0; }
+}
+
 /* Botón CV */
 .btn-cv {
   background-color: var(--btn-cv-bg);
@@ -371,6 +396,31 @@ ul { list-style: none; }
 
 .btn-cv:hover::before {
   transform: translateX(0);
+}
+
+/* Shimmer esmeralda */
+.btn-cv::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(52,211,153,0.22) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: btn-shimmer-emerald 4s ease-in-out infinite 1.8s;
+  pointer-events: none;
+}
+
+@keyframes btn-shimmer-emerald {
+  0%        { left: -75%; opacity: 0; }
+  10%       { opacity: 1; }
+  40%, 100% { left: 130%; opacity: 0; }
 }
 
 .btn-large {
