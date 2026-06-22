@@ -96,34 +96,42 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 // y les agrega .visible cuando aparecen en pantalla.
 // Eso activa la animación CSS definida en style.css.
 
+// Observer para elementos .reveal genéricos (solo aparecen una vez)
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
-        // Una vez visible, dejamos de observarlo para no repetir la animación
         revealObserver.unobserve(entry.target);
       }
     });
   },
-  {
-    threshold: 0.1,   // Se activa cuando el 10% del elemento es visible
-    rootMargin: '0px 0px -40px 0px' // Margen inferior negativo: espera un poco más
-  }
+  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
 );
 
-// Observa todos los elementos con clase .reveal
-document.querySelectorAll('.reveal').forEach(el => {
+document.querySelectorAll('.reveal:not(.timeline-item)').forEach(el => {
   revealObserver.observe(el);
 });
 
-// Line draw: activa la animación de la línea del timeline al entrar en view
+// Observer para timeline-item: se anima al entrar Y al salir (scroll up y down)
+const timelineItemObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach(entry => {
+      entry.target.classList.toggle('visible', entry.isIntersecting);
+    });
+  },
+  { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+);
+
+document.querySelectorAll('.timeline-item').forEach(el => {
+  timelineItemObserver.observe(el);
+});
+
+// Line draw: se activa al entrar en view y se mantiene
 const timelineEl = document.querySelector('.timeline');
 if (timelineEl) {
   new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      timelineEl.classList.add('line-drawn');
-    }
+    if (entries[0].isIntersecting) timelineEl.classList.add('line-drawn');
   }, { threshold: 0.05 }).observe(timelineEl);
 }
 
