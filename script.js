@@ -117,6 +117,16 @@ document.querySelectorAll('.reveal').forEach(el => {
   revealObserver.observe(el);
 });
 
+// Line draw: activa la animación de la línea del timeline al entrar en view
+const timelineEl = document.querySelector('.timeline');
+if (timelineEl) {
+  new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) {
+      timelineEl.classList.add('line-drawn');
+    }
+  }, { threshold: 0.05 }).observe(timelineEl);
+}
+
 
 // ===== 3. NAVBAR — Sombra al hacer scroll =====
 // Agrega una clase al navbar cuando el usuario baja de 50px
