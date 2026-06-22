@@ -1736,12 +1736,28 @@ body::after {
 }
 
 .typewriter-flash {
-  animation: tw-flash 0.55s ease forwards;
+  animation: tw-flash 1.8s ease forwards;
 }
 
 @keyframes tw-flash {
   0%   { text-shadow: none; color: inherit; }
-  25%  { text-shadow: 0 0 8px rgba(226,105,74,1), 0 0 25px rgba(226,105,74,0.9), 0 0 60px rgba(90,175,255,0.8), 0 0 100px rgba(90,175,255,0.4); color: #fff; }
-  60%  { text-shadow: 0 0 6px rgba(226,105,74,0.6), 0 0 18px rgba(226,105,74,0.4), 0 0 40px rgba(90,175,255,0.3); color: #fff; }
+  15%  { text-shadow:
+           0 0 6px  rgba(255,255,255,1),
+           0 0 18px rgba(226,105,74,1),
+           0 0 40px rgba(226,105,74,0.95),
+           0 0 80px rgba(90,175,255,0.9),
+           0 0 140px rgba(90,175,255,0.6),
+           0 0 220px rgba(90,175,255,0.25);
+         color: #fff; }
+  40%  { text-shadow:
+           0 0 10px rgba(226,105,74,0.8),
+           0 0 35px rgba(226,105,74,0.6),
+           0 0 70px rgba(90,175,255,0.5),
+           0 0 120px rgba(90,175,255,0.2);
+         color: #fff; }
+  70%  { text-shadow:
+           0 0 6px rgba(226,105,74,0.35),
+           0 0 20px rgba(90,175,255,0.2);
+         color: inherit; }
   100% { text-shadow: none; color: inherit; }
 }
