@@ -1464,9 +1464,9 @@ function correctDeltaY (delta) {
 
 function generateColor () {
     let c = HSVtoRGB(Math.random(), 0.6, 0.55);
-    c.r *= 0.08;
-    c.g *= 0.08;
-    c.b *= 0.08;
+    c.r *= 0.22;
+    c.g *= 0.22;
+    c.b *= 0.22;
     return c;
 }
 
