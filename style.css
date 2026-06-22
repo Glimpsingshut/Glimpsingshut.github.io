@@ -284,23 +284,21 @@ ul { list-style: none; }
 
 /* Botón Contact me — azul neon */
 .btn-contact {
-  background-color: rgba(90,175,255,0.12);
-  color: #5aaeff;
-  border-color: rgba(90,175,255,0.5);
-  box-shadow: 0 4px 16px rgba(90,175,255,0.2);
+  background-color: #5aaeff;
+  color: #fff;
+  border-color: #5aaeff;
+  box-shadow: 0 4px 16px rgba(90,175,255,0.3);
   overflow: hidden;
   animation: btn-pulse-blue 2.8s ease-in-out infinite;
 }
 
 .btn-contact::before {
-  background-color: rgba(90,175,255,0.12);
+  background-color: rgba(255,255,255,0.1);
 }
 
 .btn-contact:hover {
-  background-color: rgba(90,175,255,0.2);
-  border-color: #5aaeff;
-  color: #fff;
-  box-shadow: 0 8px 28px rgba(90,175,255,0.4);
+  opacity: 0.88;
+  box-shadow: 0 8px 28px rgba(90,175,255,0.45);
   animation: none;
 }
 
