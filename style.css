@@ -1458,9 +1458,7 @@ ul { list-style: none; }
   width: 22px;
   height: 22px;
   border-radius: 5px;
-  object-fit: contain;
-  background: #fff;
-  padding: 2px;
+  object-fit: cover;
   flex-shrink: 0;
 }
 
