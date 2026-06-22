@@ -302,23 +302,23 @@ ul { list-style: none; }
   transform: translateX(0);
 }
 
-/* Botón Contact me — azul neon */
+/* Botón Contact me — outline secundario */
 .btn-contact {
-  background-color: #6366f1;
-  color: #fff;
-  border-color: #6366f1;
-  box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+  background-color: transparent;
+  color: rgba(237,233,225,0.9);
+  border-color: rgba(255,255,255,0.25);
+  box-shadow: none;
   overflow: hidden;
-  animation: btn-pulse-blue 2.8s ease-in-out infinite;
 }
 
 .btn-contact::before {
-  background-color: rgba(255,255,255,0.1);
+  background-color: rgba(255,255,255,0.06);
 }
 
 .btn-contact:hover {
-  opacity: 0.88;
-  box-shadow: 0 8px 28px rgba(99,102,241,0.45);
+  color: #fff;
+  border-color: rgba(255,255,255,0.55);
+  box-shadow: 0 4px 18px rgba(255,255,255,0.08);
   animation: none;
 }
 
@@ -326,34 +326,15 @@ ul { list-style: none; }
   transform: translateX(0);
 }
 
-/* Shimmer azul */
-.btn-contact::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(90,175,255,0.22) 50%,
-    transparent 100%
-  );
-  transform: skewX(-20deg);
-  animation: btn-shimmer-blue 4s ease-in-out infinite 1.8s;
-  pointer-events: none;
+[data-theme="light"] .btn-contact {
+  color: rgba(28,20,18,0.8);
+  border-color: rgba(28,20,18,0.25);
 }
 
-@keyframes btn-pulse-blue {
-  0%, 100% { box-shadow: 0 4px 16px rgba(99,102,241,0.25); }
-  50%       { box-shadow: 0 4px 28px rgba(99,102,241,0.55), 0 0 40px rgba(99,102,241,0.2); }
-}
-
-@keyframes btn-shimmer-blue {
-  0%        { left: -75%; opacity: 0; }
-  10%       { opacity: 1; }
-  40%, 100% { left: 130%; opacity: 0; }
+[data-theme="light"] .btn-contact:hover {
+  color: #1c1412;
+  border-color: rgba(28,20,18,0.6);
+  box-shadow: none;
 }
 
 /* Botón CV */
