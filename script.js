@@ -96,14 +96,11 @@ document.querySelectorAll('.nav-links a').forEach(link => {
 // y les agrega .visible cuando aparecen en pantalla.
 // Eso activa la animación CSS definida en style.css.
 
-// Observer para elementos .reveal genéricos (solo aparecen una vez)
+// Observer para todos los elementos .reveal — se anima al entrar Y al salir
 const revealObserver = new IntersectionObserver(
   (entries) => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
+      entry.target.classList.toggle('visible', entry.isIntersecting);
     });
   },
   { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
