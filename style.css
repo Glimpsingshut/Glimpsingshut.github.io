@@ -1144,8 +1144,18 @@ ul { list-style: none; }
 /* ── Contact cards ── */
 .contact-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
+}
+
+.contact-card--wa .contact-card-icon {
+  background: rgba(37,211,102,0.1);
+  color: #25d366;
+}
+
+.contact-card--wa:hover {
+  border-color: #25d366;
+  box-shadow: 0 8px 28px rgba(37,211,102,0.14);
 }
 
 .contact-card {
@@ -1198,7 +1208,13 @@ ul { list-style: none; }
   text-overflow: ellipsis;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 860px) {
+  .contact-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
   .contact-cards {
     grid-template-columns: 1fr;
   }
