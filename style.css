@@ -78,7 +78,7 @@
   --color-bg: #1c2030;
   --color-surface: #232840;
   --color-text: #ede9e1;
-  --color-text-muted: rgba(237,233,225,0.5);
+  --color-text-muted: rgba(237,233,225,0.8);
   --color-accent: #e2694a;
   --color-accent-light: rgba(226,105,74,0.12);
   --color-border: rgba(255,255,255,0.08);
@@ -127,7 +127,7 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-bg);
   color: var(--color-text);
-  line-height: 1.7;
+  line-height: 1.85;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
