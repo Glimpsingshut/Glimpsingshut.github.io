@@ -207,28 +207,72 @@ if (yearEl) {
   const ring = document.getElementById('cursor-ring');
   if (!dot || !ring) return;
 
-  // Only activate on devices with a fine pointer (mouse)
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
   let mx = window.innerWidth / 2, my = window.innerHeight / 2;
   let rx = mx, ry = my;
+  let dotScale = 1;
+  let ringScale = 1;
+  let ringOpacity = 0.5;
 
+  // --- Position ---
   document.addEventListener('mousemove', e => {
     mx = e.clientX;
     my = e.clientY;
-    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
+    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%)) scale(${dotScale})`;
   });
 
   (function animateRing() {
     rx += (mx - rx) * 0.14;
     ry += (my - ry) * 0.14;
-    ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
+    ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%)) scale(${ringScale})`;
+    ring.style.opacity = ringOpacity;
     requestAnimationFrame(animateRing);
   })();
 
+  // --- Hover expand ---
   document.querySelectorAll('a, button, .btn, .carousel-btn').forEach(el => {
     el.addEventListener('mouseenter', () => ring.classList.add('ring-expand'));
     el.addEventListener('mouseleave', () => ring.classList.remove('ring-expand'));
+  });
+
+  // --- Click: dot compress + ring pulse ---
+  document.addEventListener('mousedown', () => {
+    dotScale = 0.4;
+    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%)) scale(${dotScale})`;
+    ringScale = 1.8;
+    ringOpacity = 0;
+    setTimeout(() => {
+      ringScale = 1;
+      ringOpacity = 0.5;
+    }, 380);
+  });
+
+  document.addEventListener('mouseup', () => {
+    dotScale = 1;
+    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%)) scale(${dotScale})`;
+  });
+
+  // --- Magnetic effect on buttons ---
+  const magneticEls = document.querySelectorAll('.btn, .carousel-btn');
+  magneticEls.forEach(el => {
+    // Add transition for smooth magnetic movement
+    el.style.transition = el.style.transition
+      ? el.style.transition + ', translate 0.3s cubic-bezier(0.16,1,0.3,1)'
+      : 'translate 0.3s cubic-bezier(0.16,1,0.3,1)';
+
+    el.addEventListener('mousemove', e => {
+      const rect = el.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX - cx) * 0.28;
+      const dy = (e.clientY - cy) * 0.28;
+      el.style.translate = `${dx}px ${dy}px`;
+    });
+
+    el.addEventListener('mouseleave', () => {
+      el.style.translate = '0px 0px';
+    });
   });
 })();
 
