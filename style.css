@@ -1081,50 +1081,127 @@ ul { list-style: none; }
   background: var(--color-surface);
 }
 
-/* Caja centrada */
 .contact-inner {
-  max-width: 600px;
+  max-width: 700px;
   margin: 0 auto;
   text-align: center;
 }
 
 .contact-inner h2 {
-  font-size: 100rem;
-  font-weight: 600;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.025em;
   margin-bottom: var(--space-sm);
 }
 
 .contact-inner > p {
   color: var(--color-text-muted);
   font-size: var(--font-size-lg);
-  margin-bottom: var(--space-lg);
+  margin-bottom: 0;
 }
 
-/* Links de redes sociales */
-.social-links {
-  display: flex;
-  justify-content: center;
-  gap: var(--space-lg);
-  margin-top: var(--space-lg);
-}
-
-.social-links a {
+/* ── Status badge ── */
+.contact-status {
   display: inline-flex;
-  flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  color: var(--color-text-muted);
-  transition: color 0.18s ease, transform 0.18s ease;
-  transform-origin: center center;
-  text-align: center;
-  will-change: transform, color;
+  gap: 0.55rem;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.25);
+  color: rgb(34,197,94);
+  padding: 0.38rem 1rem;
+  border-radius: 100px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  margin-bottom: 1.5rem;
 }
 
-.social-links a:hover {
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: rgb(34,197,94);
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.6); }
+  50%       { box-shadow: 0 0 0 5px rgba(34,197,94,0); }
+}
+
+/* ── Context meta ── */
+.contact-meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.4rem 2rem;
+  margin: 1.4rem 0 2.2rem;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* ── Contact cards ── */
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.contact-card {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.2rem 1.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  text-align: left;
+  transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+}
+
+.contact-card:hover {
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 28px rgba(226,105,74,0.14);
+  transform: translateY(-3px);
+}
+
+.contact-card-icon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--color-accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--color-accent);
+}
+
+.contact-card-label {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  margin-bottom: 0.2rem;
+}
+
+.contact-card-value {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 500;
   color: var(--color-text);
-  transform: scale(1.04);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 640px) {
+  .contact-cards {
+    grid-template-columns: 1fr;
+  }
 }
 
 .social-icon {
