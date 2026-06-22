@@ -176,13 +176,41 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
   const text = el.textContent.trim();
   el.textContent = '';
 
-  // Velocidad humana: base 90ms ± hasta 55ms de variación aleatoria
-  // Pausa extra después de puntuación para imitar ritmo natural
+  const GLITCH_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%';
+
+  function randomChar() {
+    return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+  }
+
   function humanDelay(char) {
-    const base = 90;
+    const base  = 90;
     const jitter = Math.random() * 55;
-    const pause = /[·\-,.]/.test(char) ? 120 : 0;
+    const pause  = /[·\-,.]/.test(char) ? 120 : 0;
     return base + jitter + pause;
+  }
+
+  // Opción 4: glitch de 3 caracteres falsos antes de escribir correctamente
+  function glitchThenType() {
+    let glitches = 0;
+    const MAX_GLITCH = 3;
+
+    function showGlitch() {
+      if (glitches < MAX_GLITCH) {
+        el.textContent = randomChar() + randomChar() + randomChar();
+        glitches++;
+        setTimeout(showGlitch, 80);
+      } else {
+        el.textContent = '';
+        setTimeout(startTyping, 120);
+      }
+    }
+    showGlitch();
+  }
+
+  // Opción 2: highlight al terminar de escribir
+  function flashHighlight() {
+    el.classList.add('typewriter-flash');
+    setTimeout(() => el.classList.remove('typewriter-flash'), 600);
   }
 
   function startTyping() {
@@ -194,23 +222,27 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
         el.textContent += text[i];
         setTimeout(type, humanDelay(text[i++]));
       } else {
-        // Cursor parpadea 2.5s luego desaparece
-        setTimeout(() => el.classList.remove('typewriter'), 2500);
+        flashHighlight();
+        setTimeout(() => el.classList.remove('typewriter'), 2800);
       }
     }
     type();
+  }
+
+  function begin() {
+    setTimeout(glitchThenType, 200);
   }
 
   if (overlay) {
     const obs = new MutationObserver(() => {
       if (!document.getElementById('fire-overlay')) {
         obs.disconnect();
-        setTimeout(startTyping, 200);
+        begin();
       }
     });
     obs.observe(document.body, { childList: true, subtree: true });
   } else {
-    setTimeout(startTyping, 400);
+    begin();
   }
 })();
 
