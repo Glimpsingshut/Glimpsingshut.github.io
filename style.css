@@ -617,10 +617,15 @@ ul { list-style: none; }
 }
 
 .name-fire {
-  background-image: linear-gradient(90deg, #60c8ff 0%, #0074ff 40%, #0047b3 100%);
-  text-shadow: 0 2px 8px rgba(0,164,255,0.25), 0 6px 24px rgba(0,100,200,0.12);
-  filter: drop-shadow(0 4px 14px rgba(0,140,255,0.15));
-  animation: flame 3s linear infinite, flicker 5s infinite;
+  background-image: linear-gradient(100deg, #60c8ff 0%, #7c6fff 35%, #e2694a 70%, #ff9f4a 100%);
+  background-size: 200% 100%;
+  text-shadow: 0 2px 8px rgba(120,100,255,0.2), 0 6px 24px rgba(226,105,74,0.15);
+  filter: drop-shadow(0 4px 14px rgba(100,120,255,0.15));
+  animation: flame 3s linear infinite, flicker 5s infinite, gradient-shift 6s ease infinite;
+}
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
 .name-fire::before {
   display: none;
@@ -1439,12 +1444,20 @@ ul { list-style: none; }
 
 .timeline-card {
   position: relative;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: rgba(35, 40, 64, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
   border-radius: 14px;
   padding: 1.4rem 1.6rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   overflow: hidden;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+[data-theme="light"] .timeline-card {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.06);
 }
 
 /* 4. TENURE BAR — barra que se llena proporcionalmente a la duración del rol */
@@ -2357,4 +2370,155 @@ body::after {
 #back-to-top:hover {
   box-shadow: 0 6px 20px rgba(226,105,74,0.35);
   transform: translateY(-2px);
+}
+
+/* ===== SCROLL PROGRESS BAR ===== */
+#scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, #60c8ff, #7c6fff, #e2694a);
+  z-index: 10000;
+  transition: width 0.1s linear;
+  pointer-events: none;
+}
+
+/* ===== AVAILABILITY BADGE ===== */
+.availability-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 99px;
+  background: rgba(52,211,153,0.1);
+  border: 1px solid rgba(52,211,153,0.3);
+  color: #34d399;
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  margin-bottom: 1rem;
+}
+.availability-badge .pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  animation: pulse-green 2s ease infinite;
+}
+@keyframes pulse-green {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+/* ===== COPY EMAIL TOAST ===== */
+#email-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-surface);
+  border: 1px solid rgba(52,211,153,0.4);
+  color: #34d399;
+  padding: 0.65rem 1.4rem;
+  border-radius: 99px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+}
+#email-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ===== STATS COUNTER ===== */
+.stats-row {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-text);
+  background: linear-gradient(100deg, #60c8ff, #7c6fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.stat-label {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-top: 0.2rem;
+}
+
+/* ===== TECH STACK ===== */
+.techstack {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-border);
+}
+.techstack-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-text-muted);
+  margin-bottom: 1.2rem;
+}
+.techstack-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.tech-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 99px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+[data-theme="light"] .tech-pill {
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.tech-pill:hover {
+  border-color: rgba(124,111,255,0.5);
+  background: rgba(124,111,255,0.08);
+  color: var(--color-text);
+}
+.tech-pill svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ===== DOWNLOAD CV BTN ===== */
+.btn-cv {
+  background: var(--btn-cv-bg);
+  color: var(--btn-cv-color);
+  border-color: var(--btn-cv-border);
+}
+.btn-cv:hover {
+  background: var(--color-accent);
+  color: #fff;
+  border-color: var(--color-accent);
 }

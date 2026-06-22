@@ -787,3 +787,58 @@ if (yearEl) {
   scheduleNext();
 })();
 
+
+// ===== SCROLL PROGRESS BAR =====
+(function () {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (scrolled / total * 100) + '%';
+  }, { passive: true });
+})();
+
+// ===== COPY EMAIL TOAST =====
+(function () {
+  const email = 'uarredondov@hotmail.com';
+  const toast = document.getElementById('email-toast');
+  const contactBtns = document.querySelectorAll('.btn-contact, a[href="#contact"]');
+  contactBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      navigator.clipboard.writeText(email).then(() => {
+        if (!toast) return;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2500);
+      }).catch(() => {
+        // Fallback: scroll to contact section
+        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  });
+})();
+
+// ===== ANIMATED STATS COUNTER =====
+(function () {
+  const counters = document.querySelectorAll('.stat-number[data-target]');
+  if (!counters.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '+';
+      const duration = 1200;
+      const step = Math.ceil(duration / target);
+      let current = 0;
+      const timer = setInterval(() => {
+        current++;
+        el.textContent = current + (current >= target ? suffix : '');
+        if (current >= target) clearInterval(timer);
+      }, step);
+      obs.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  counters.forEach(el => obs.observe(el));
+})();
