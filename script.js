@@ -132,6 +132,45 @@ if (timelineEl) {
   }, { threshold: 0.05 }).observe(timelineEl);
 }
 
+// Sequential tag highlight: cicla por los tags de cada card visible
+(function initTagHighlight() {
+  const STEP = 500;   // ms entre tags
+  const HOLD = 400;   // ms que el tag permanece iluminado
+  const PAUSE = 1200; // ms de pausa al terminar el ciclo
+
+  document.querySelectorAll('.timeline-item').forEach(item => {
+    let timer = null;
+    let idx = 0;
+
+    function cycle() {
+      const tags = Array.from(item.querySelectorAll('.timeline-tags span'));
+      if (!tags.length) return;
+
+      tags.forEach(t => t.classList.remove('tag-lit'));
+      tags[idx].classList.add('tag-lit');
+
+      setTimeout(() => tags[idx].classList.remove('tag-lit'), HOLD);
+
+      idx = (idx + 1) % tags.length;
+      const delay = idx === 0 ? PAUSE : STEP;
+      timer = setTimeout(cycle, delay);
+    }
+
+    // Arranca cuando el item entra en vista, para cuando sale
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        idx = 0;
+        timer = setTimeout(cycle, 1400); // espera que terminen las pop-in
+      } else {
+        clearTimeout(timer);
+        item.querySelectorAll('.timeline-tags span').forEach(t => t.classList.remove('tag-lit'));
+      }
+    }, { threshold: 0.1 });
+
+    obs.observe(item);
+  });
+})();
+
 
 // ===== 3. NAVBAR — Sombra al hacer scroll =====
 // Agrega una clase al navbar cuando el usuario baja de 50px

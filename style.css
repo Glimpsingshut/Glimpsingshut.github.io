@@ -1598,6 +1598,14 @@ ul { list-style: none; }
 .timeline-item.visible .timeline-tags span:nth-child(9)  { transition-delay: 1.16s; }
 .timeline-item.visible .timeline-tags span:nth-child(10) { transition-delay: 1.23s; }
 
+.timeline-tags span.tag-lit {
+  background: rgba(226,105,74,0.22);
+  border-color: rgba(226,105,74,0.75);
+  color: var(--color-accent);
+  box-shadow: 0 0 10px rgba(226,105,74,0.25);
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
 /* ===== EDUCATION & CERTIFICATIONS ===== */
 .edu-grid {
   display: grid;
