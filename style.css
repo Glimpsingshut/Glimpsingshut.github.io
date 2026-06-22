@@ -282,6 +282,62 @@ ul { list-style: none; }
   transform: translateX(0);
 }
 
+/* Botón Contact me — azul neon */
+.btn-contact {
+  background-color: rgba(90,175,255,0.12);
+  color: #5aaeff;
+  border-color: rgba(90,175,255,0.5);
+  box-shadow: 0 4px 16px rgba(90,175,255,0.2);
+  overflow: hidden;
+  animation: btn-pulse-blue 2.8s ease-in-out infinite;
+}
+
+.btn-contact::before {
+  background-color: rgba(90,175,255,0.12);
+}
+
+.btn-contact:hover {
+  background-color: rgba(90,175,255,0.2);
+  border-color: #5aaeff;
+  color: #fff;
+  box-shadow: 0 8px 28px rgba(90,175,255,0.4);
+  animation: none;
+}
+
+.btn-contact:hover::before {
+  transform: translateX(0);
+}
+
+/* Shimmer azul */
+.btn-contact::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(90,175,255,0.22) 50%,
+    transparent 100%
+  );
+  transform: skewX(-20deg);
+  animation: btn-shimmer-blue 4s ease-in-out infinite 1.8s;
+  pointer-events: none;
+}
+
+@keyframes btn-pulse-blue {
+  0%, 100% { box-shadow: 0 4px 16px rgba(90,175,255,0.2); }
+  50%       { box-shadow: 0 4px 28px rgba(90,175,255,0.5), 0 0 40px rgba(90,175,255,0.18); }
+}
+
+@keyframes btn-shimmer-blue {
+  0%        { left: -75%; opacity: 0; }
+  10%       { opacity: 1; }
+  40%, 100% { left: 130%; opacity: 0; }
+}
+
 /* Botón CV */
 .btn-cv {
   background-color: var(--btn-cv-bg);
