@@ -206,13 +206,14 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
   }
 
   if (overlay) {
+    // Arranca en cuanto el overlay empieza su fade-out (no espera a que desaparezca)
     const obs = new MutationObserver(() => {
-      if (!document.getElementById('fire-overlay')) {
+      if (overlay.classList.contains('fade-out')) {
         obs.disconnect();
         begin();
       }
     });
-    obs.observe(document.body, { childList: true, subtree: true });
+    obs.observe(overlay, { attributes: true, attributeFilter: ['class'] });
   } else {
     begin();
   }
