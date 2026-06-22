@@ -1228,16 +1228,16 @@ ul { list-style: none; }
 }
 
 [data-theme="light"] .aurora-blob--a {
-  background: radial-gradient(circle, rgba(80,110,230,0.10) 0%, transparent 70%);
-  filter: blur(55px);
+  background: radial-gradient(circle, rgba(80,110,230,0.22) 0%, transparent 65%);
+  filter: blur(45px);
 }
 [data-theme="light"] .aurora-blob--b {
-  background: radial-gradient(circle, rgba(160,80,200,0.08) 0%, transparent 70%);
-  filter: blur(65px);
+  background: radial-gradient(circle, rgba(160,80,200,0.18) 0%, transparent 65%);
+  filter: blur(50px);
 }
 [data-theme="light"] .aurora-blob--c {
-  background: radial-gradient(circle, rgba(201,82,46,0.10) 0%, transparent 70%);
-  filter: blur(70px);
+  background: radial-gradient(circle, rgba(201,82,46,0.20) 0%, transparent 65%);
+  filter: blur(55px);
 }
 
 /* ===== CUSTOM CURSOR ===== */
