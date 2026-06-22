@@ -942,30 +942,13 @@ ul { list-style: none; }
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transform: scale(1);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition: opacity 0.45s ease;
   cursor: zoom-in;
   display: block;
 }
 
 .slide-img.active {
   opacity: 1;
-  transform: scale(1);
-  animation: img-zoom-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* Foto entrante: viene desde ligeramente cerca y se asienta */
-@keyframes img-zoom-in {
-  from { opacity: 0; transform: scale(1.07); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
-/* Foto saliente: se aleja y desvanece */
-.slide-img.leaving {
-  opacity: 0 !important;
-  transform: scale(0.78) !important;
-  transition: opacity 0.45s ease, transform 0.5s ease !important;
-  pointer-events: none;
 }
 
 /* Flechas dentro del viewer */
