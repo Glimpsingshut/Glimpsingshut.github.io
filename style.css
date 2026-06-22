@@ -1455,11 +1455,16 @@ ul { list-style: none; }
 
 /* Logo de empresa */
 .company-logo {
-  width: 22px;
-  height: 22px;
+  width: 28px;
+  height: 28px;
   border-radius: 5px;
   object-fit: cover;
   flex-shrink: 0;
+}
+.company-logo--light {
+  background: #fff;
+  padding: 3px;
+  object-fit: contain;
 }
 
 /* Empresa como header cuando agrupa varios roles */
