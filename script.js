@@ -176,24 +176,8 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
   }
 
   // --- Botones ---
-  btnPrev.addEventListener('click', () => { goTo(current - 1); resetAutoPlay(); });
-  btnNext.addEventListener('click', () => { goTo(current + 1); resetAutoPlay(); });
-
-  // --- Auto-play cada 5 segundos ---
-  function startAutoPlay() {
-    autoPlayTimer = setInterval(() => goTo(current + 1), 5000);
-  }
-
-  function resetAutoPlay() {
-    clearInterval(autoPlayTimer);
-    startAutoPlay();
-  }
-
-  startAutoPlay();
-
-  // Pausa al pasar el mouse por encima
-  carousel.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
-  carousel.addEventListener('mouseleave', startAutoPlay);
+  btnPrev.addEventListener('click', () => goTo(current - 1));
+  btnNext.addEventListener('click', () => goTo(current + 1));
 
   // --- Soporte de swipe táctil (móvil) ---
   let touchStartX = 0;
