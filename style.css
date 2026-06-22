@@ -2479,6 +2479,18 @@ body::after {
   color: var(--color-text-muted);
   margin-bottom: 1.2rem;
 }
+.techstack-category {
+  margin-bottom: 1.1rem;
+}
+.techstack-cat-label {
+  display: block;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  opacity: 0.55;
+  margin-bottom: 0.55rem;
+}
 .techstack-grid {
   display: flex;
   flex-wrap: wrap;
