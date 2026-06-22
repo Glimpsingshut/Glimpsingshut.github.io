@@ -201,7 +201,39 @@ if (yearEl) {
 }
 
 
-// ===== 7. HYPERSPACE — Intro animation =====
+// ===== 7. CUSTOM CURSOR =====
+(function () {
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  if (!dot || !ring) return;
+
+  // Only activate on devices with a fine pointer (mouse)
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+  let rx = mx, ry = my;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX;
+    my = e.clientY;
+    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%))`;
+  });
+
+  (function animateRing() {
+    rx += (mx - rx) * 0.14;
+    ry += (my - ry) * 0.14;
+    ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%))`;
+    requestAnimationFrame(animateRing);
+  })();
+
+  document.querySelectorAll('a, button, .btn, .carousel-btn').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('ring-expand'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('ring-expand'));
+  });
+})();
+
+
+// ===== 8. HYPERSPACE — Intro animation =====
 (function () {
   const overlay = document.getElementById('fire-overlay');
   const canvas  = document.getElementById('fire-canvas');
