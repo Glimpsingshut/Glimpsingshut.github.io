@@ -2260,6 +2260,11 @@ body::after {
   text-shadow: 0 0 8px rgba(90,175,255,0.8), 0 0 22px rgba(90,175,255,0.4);
 }
 
+[data-theme="light"] .nav-links a.nav-active {
+  color: var(--color-accent);
+  text-shadow: 0 0 8px rgba(226,105,74,0.5), 0 0 22px rgba(226,105,74,0.25);
+}
+
 /* ===== TYPEWRITER CURSOR ===== */
 .typewriter {
   border-right: 2px solid currentColor;
