@@ -201,7 +201,47 @@ if (yearEl) {
 }
 
 
-// ===== 7. NEON WAVES =====
+// ===== 7. AURORA PARALLAX =====
+(function () {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const blobA = document.querySelector('.aurora-blob--a');
+  const blobB = document.querySelector('.aurora-blob--b');
+  const blobC = document.querySelector('.aurora-blob--c');
+  if (!blobA || !blobB || !blobC) return;
+
+  let tx = 0, ty = 0; // target
+  let ax = 0, ay = 0; // blob A current
+  let bx = 0, by = 0; // blob B current
+  let cx = 0, cy = 0; // blob C current
+
+  document.addEventListener('mousemove', e => {
+    // normalize -1 to 1 from center
+    tx = (e.clientX / window.innerWidth  - 0.5) * 2;
+    ty = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  (function tick() {
+    // each blob interpolates at a different speed and depth
+    ax += (tx * 38 - ax) * 0.04;
+    ay += (ty * 28 - ay) * 0.04;
+
+    bx += (tx * -28 - bx) * 0.03;
+    by += (ty * -22 - by) * 0.03;
+
+    cx += (tx * 18 - cx) * 0.05;
+    cy += (ty * 22 - cy) * 0.05;
+
+    blobA.style.translate = `${ax}px ${ay}px`;
+    blobB.style.translate = `${bx}px ${by}px`;
+    blobC.style.translate = `${cx}px ${cy}px`;
+
+    requestAnimationFrame(tick);
+  })();
+})();
+
+
+// ===== 8. NEON WAVES =====
 (function () {
   const canvas = document.getElementById('neon-waves');
   if (!canvas) return;
