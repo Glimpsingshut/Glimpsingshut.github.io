@@ -40,12 +40,12 @@ let config = {
     CURL: 12,
     SPLAT_RADIUS: 0.07,
     SPLAT_FORCE: 5000,
-    SHADING: true,
+    SHADING: false,
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 4,
     PAUSED: false,
     BACK_COLOR: { r: 0, g: 0, b: 0 },
-    TRANSPARENT: true,
+    TRANSPARENT: false,
     BLOOM: false,
     BLOOM_ITERATIONS: 8,
     BLOOM_RESOLUTION: 256,
@@ -1463,10 +1463,10 @@ function correctDeltaY (delta) {
 }
 
 function generateColor () {
-    let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-    c.r *= 0.6;
-    c.g *= 0.6;
-    c.b *= 0.6;
+    let c = HSVtoRGB(Math.random(), 0.7, 0.9);
+    c.r *= 0.7;
+    c.g *= 0.7;
+    c.b *= 0.7;
     return c;
 }
 
