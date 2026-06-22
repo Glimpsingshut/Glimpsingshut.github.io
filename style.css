@@ -105,6 +105,10 @@
   mix-blend-mode: screen;
 }
 
+[data-theme="light"] #fluid {
+  mix-blend-mode: multiply;
+}
+
 /* ===== RESET y BASE ===== */
 *, *::before, *::after {
   box-sizing: border-box;
