@@ -189,59 +189,51 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
     return base + jitter + pause;
   }
 
-  // Opción 4: cada carácter muestra 3 frames de glitch antes de fijarse
-  function glitchThenType() {
-    el.textContent = '';
-    setTimeout(startTyping, 120);
-  }
-
-  // Escribe un carácter con glitch: muestra chars aleatorios → fija el real
-  function typeCharWithGlitch(typed, realChar, done) {
-    const FRAMES = 4;   // cuántos frames falsos por letra
-    const FRAME_MS = 55; // duración de cada frame falso
-    let f = 0;
-
-    function frame() {
-      if (f < FRAMES) {
-        el.textContent = typed + randomChar();
-        f++;
-        setTimeout(frame, FRAME_MS);
-      } else {
-        el.textContent = typed + realChar;
-        done();
-      }
-    }
-    frame();
-  }
-
-  // Opción 2: highlight al terminar de escribir
+  // Opción 2: highlight al terminar
   function flashHighlight() {
     el.classList.add('typewriter-flash');
     setTimeout(() => el.classList.remove('typewriter-flash'), 600);
   }
 
-  function startTyping() {
-    let i = 0;
+  // Opción 4 (rediseño): todos los caracteres aparecen scrambled a la vez
+  // y se van "resolviendo" de izquierda a derecha hasta formar el texto final
+  function begin() {
+    const chars  = text.split('');
+    const locked = new Array(chars.length).fill(false);
+    const TOTAL  = 1800; // ms hasta que el último caracter se fija
+    const FRAME  = 45;   // ms entre frames de scramble
+
+    el.textContent = text.replace(/./g, () => randomChar()); // muestra todo scrambled de entrada
     el.classList.add('typewriter');
 
-    function type() {
-      if (i < text.length) {
-        const typed   = text.slice(0, i);
-        const realChar = text[i];
-        i++;
-        typeCharWithGlitch(typed, realChar, () => {
-          setTimeout(type, humanDelay(realChar));
-        });
+    // Cada posición se fija en un momento escalonado (izq → der + pequeña variación)
+    chars.forEach((_, i) => {
+      const t = (i / chars.length) * TOTAL * 0.85 + Math.random() * 140;
+      setTimeout(() => { locked[i] = true; }, t);
+    });
+
+    function frame() {
+      let result   = '';
+      let allDone  = true;
+      for (let i = 0; i < chars.length; i++) {
+        if (locked[i]) {
+          result += chars[i];
+        } else {
+          allDone = false;
+          result += chars[i] === ' ' ? ' ' : randomChar();
+        }
+      }
+      el.textContent = result;
+
+      if (!allDone) {
+        setTimeout(frame, FRAME);
       } else {
         flashHighlight();
         setTimeout(() => el.classList.remove('typewriter'), 2800);
       }
     }
-    type();
-  }
 
-  function begin() {
-    setTimeout(glitchThenType, 200);
+    setTimeout(frame, FRAME);
   }
 
   if (overlay) {
