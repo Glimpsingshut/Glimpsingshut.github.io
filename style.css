@@ -102,11 +102,8 @@
   height: 100vh;
   z-index: 9998;
   pointer-events: none;
-  mix-blend-mode: screen;
-}
-
-[data-theme="light"] #fluid {
-  mix-blend-mode: multiply;
+  mix-blend-mode: normal;
+  opacity: 0.55;
 }
 
 /* ===== RESET y BASE ===== */
