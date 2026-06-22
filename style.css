@@ -102,6 +102,7 @@
   height: 100vh;
   z-index: 9998;
   pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 /* ===== RESET y BASE ===== */
