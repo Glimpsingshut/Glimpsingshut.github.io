@@ -371,16 +371,20 @@ ul { list-style: none; }
 }
 
 .nav-links a:hover {
-  color: var(--color-text);
+  color: #fff;
   text-shadow:
-    0 0 12px rgba(90,175,255,0.7),
-    0 0 28px rgba(90,175,255,0.35);
+    0 0 6px rgba(90,175,255,1),
+    0 0 18px rgba(90,175,255,0.85),
+    0 0 40px rgba(90,175,255,0.5),
+    0 0 70px rgba(90,175,255,0.2);
 }
 
 [data-theme="light"] .nav-links a:hover {
+  color: #1a3a8f;
   text-shadow:
-    0 0 10px rgba(60,120,220,0.5),
-    0 0 22px rgba(60,120,220,0.25);
+    0 0 6px rgba(60,120,220,0.8),
+    0 0 18px rgba(60,120,220,0.5),
+    0 0 40px rgba(60,120,220,0.25);
 }
 
 /* Botón toggle de tema oscuro/claro */
