@@ -201,7 +201,63 @@ if (yearEl) {
 }
 
 
-// ===== 7. CUSTOM CURSOR =====
+// ===== 7. NEON WAVES =====
+(function () {
+  const canvas = document.getElementById('neon-waves');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  function resize() {
+    canvas.width  = window.innerWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const waves = [
+    { amp: 38, freq: 0.008, speed: 0.018, phase: 0,   yRatio: 0.55, color: '0,180,255',  lw: 1.8 },
+    { amp: 28, freq: 0.013, speed:-0.014, phase: 2.1,  yRatio: 0.68, color: '160,0,255',  lw: 1.4 },
+    { amp: 44, freq: 0.006, speed: 0.011, phase: 4.2,  yRatio: 0.78, color: '0,230,180',  lw: 1.2 },
+    { amp: 20, freq: 0.017, speed:-0.022, phase: 1.0,  yRatio: 0.88, color: '226,105,74', lw: 1.0 },
+  ];
+
+  function draw() {
+    const W = canvas.width, H = canvas.height;
+    ctx.clearRect(0, 0, W, H);
+
+    waves.forEach(w => {
+      w.phase += w.speed;
+      const baseY = H * w.yRatio;
+
+      ctx.beginPath();
+      for (let x = 0; x <= W; x += 3) {
+        const y = baseY + Math.sin(x * w.freq + w.phase) * w.amp;
+        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+
+      ctx.strokeStyle = `rgba(${w.color}, 0.75)`;
+      ctx.lineWidth   = w.lw;
+      ctx.shadowColor = `rgba(${w.color}, 1)`;
+      ctx.shadowBlur  = 14;
+      ctx.stroke();
+
+      // second pass — thinner inner glow
+      ctx.strokeStyle = `rgba(${w.color}, 0.95)`;
+      ctx.lineWidth   = w.lw * 0.35;
+      ctx.shadowBlur  = 6;
+      ctx.stroke();
+
+      ctx.shadowBlur = 0;
+    });
+
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
+})();
+
+
+// ===== 8. CUSTOM CURSOR =====
 (function () {
   const dot  = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
