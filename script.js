@@ -322,79 +322,79 @@ if (yearEl) {
 })();
 
 
-// ===== 8. CUSTOM CURSOR =====
+// ===== 8. CUSTOM CURSOR — TRAIL =====
 (function () {
-  const dot  = document.getElementById('cursor-dot');
-  const ring = document.getElementById('cursor-ring');
-  if (!dot || !ring) return;
-
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-  let mx = window.innerWidth / 2, my = window.innerHeight / 2;
-  let rx = mx, ry = my;
-  let dotScale = 1;
-  let ringScale = 1;
-  let ringOpacity = 0.5;
+  const canvas = document.getElementById('cursor-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
 
-  // --- Position ---
+  function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const TRAIL   = 10;
+  const BASE_R  = 5;       // radius of head dot
+  const COLOR   = [226, 105, 74]; // accent orange
+
+  const positions = Array.from({ length: TRAIL }, () => ({ x: -100, y: -100 }));
+  let mouse = { x: -100, y: -100 };
+  let isHovering = false; // over a clickable element
+
   document.addEventListener('mousemove', e => {
-    mx = e.clientX;
-    my = e.clientY;
-    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%)) scale(${dotScale})`;
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
   });
 
-  (function animateRing() {
-    rx += (mx - rx) * 0.14;
-    ry += (my - ry) * 0.14;
-    ring.style.transform = `translate(calc(${rx}px - 50%), calc(${ry}px - 50%)) scale(${ringScale})`;
-    ring.style.opacity = ringOpacity;
-    requestAnimationFrame(animateRing);
-  })();
-
-  // --- Hover expand ---
-  document.querySelectorAll('a, button, .btn, .carousel-btn').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('ring-expand'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('ring-expand'));
+  document.querySelectorAll('a, button, .btn, .carousel-btn, .nav-links a').forEach(el => {
+    el.addEventListener('mouseenter', () => isHovering = true);
+    el.addEventListener('mouseleave', () => isHovering = false);
   });
 
-  // --- Click: dot compress + ring pulse ---
-  document.addEventListener('mousedown', () => {
-    dotScale = 0.4;
-    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%)) scale(${dotScale})`;
-    ringScale = 1.8;
-    ringOpacity = 0;
-    setTimeout(() => {
-      ringScale = 1;
-      ringOpacity = 0.5;
-    }, 380);
-  });
-
-  document.addEventListener('mouseup', () => {
-    dotScale = 1;
-    dot.style.transform = `translate(calc(${mx}px - 50%), calc(${my}px - 50%)) scale(${dotScale})`;
-  });
-
-  // --- Magnetic effect on buttons ---
-  const magneticEls = document.querySelectorAll('.btn, .carousel-btn');
-  magneticEls.forEach(el => {
-    // Add transition for smooth magnetic movement
-    el.style.transition = el.style.transition
-      ? el.style.transition + ', translate 0.3s cubic-bezier(0.16,1,0.3,1)'
-      : 'translate 0.3s cubic-bezier(0.16,1,0.3,1)';
-
+  // Magnetic on buttons
+  document.querySelectorAll('.btn, .carousel-btn').forEach(el => {
+    el.style.transition = (el.style.transition || '') + ', translate 0.3s cubic-bezier(0.16,1,0.3,1)';
     el.addEventListener('mousemove', e => {
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width / 2;
-      const cy = rect.top + rect.height / 2;
-      const dx = (e.clientX - cx) * 0.28;
-      const dy = (e.clientY - cy) * 0.28;
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) * 0.28;
+      const dy = (e.clientY - (r.top  + r.height / 2)) * 0.28;
       el.style.translate = `${dx}px ${dy}px`;
     });
-
-    el.addEventListener('mouseleave', () => {
-      el.style.translate = '0px 0px';
-    });
+    el.addEventListener('mouseleave', () => { el.style.translate = '0px 0px'; });
   });
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Lerp chain
+    positions[0].x += (mouse.x - positions[0].x) * 0.28;
+    positions[0].y += (mouse.y - positions[0].y) * 0.28;
+    for (let i = 1; i < TRAIL; i++) {
+      positions[i].x += (positions[i - 1].x - positions[i].x) * 0.38;
+      positions[i].y += (positions[i - 1].y - positions[i].y) * 0.38;
+    }
+
+    // Draw dots from tail to head (smallest/most transparent first)
+    for (let i = TRAIL - 1; i >= 0; i--) {
+      const t      = 1 - i / TRAIL;           // 0 = tail, 1 = head
+      const r      = BASE_R * (isHovering ? 1.5 : 1) * (0.25 + t * 0.75);
+      const alpha  = t * (isHovering ? 0.9 : 0.75);
+      const [R, G, B] = COLOR;
+
+      ctx.beginPath();
+      ctx.arc(positions[i].x, positions[i].y, r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${R},${G},${B},${alpha.toFixed(2)})`;
+      ctx.shadowColor = `rgba(${R},${G},${B},${(alpha * 0.6).toFixed(2)})`;
+      ctx.shadowBlur = i === 0 ? 10 : 4;
+      ctx.fill();
+    }
+
+    ctx.shadowBlur = 0;
+    requestAnimationFrame(draw);
+  }
+
+  requestAnimationFrame(draw);
 })();
 
 
