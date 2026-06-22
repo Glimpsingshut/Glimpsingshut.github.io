@@ -226,8 +226,41 @@ if (yearEl) {
 }
 
 
-// ===== 7. LIGHTBOX =====
+// ===== 7. SLIDE VIEWER (B + C) & LIGHTBOX =====
 (function () {
+
+  // ── Slide viewer navigation ──
+  document.querySelectorAll('.slide-viewer').forEach(viewer => {
+    const isThumbMode = viewer.classList.contains('slide-viewer--thumbs');
+    const imgContainer = isThumbMode
+      ? viewer.querySelector('.slide-viewer-main .slide-viewer-images')
+      : viewer.querySelector('.slide-viewer-images');
+
+    const imgs    = Array.from(imgContainer.querySelectorAll('.slide-img'));
+    const thumbs  = isThumbMode ? Array.from(viewer.querySelectorAll('.slide-thumb')) : [];
+    const counter = viewer.querySelector('.slide-counter');
+    const btnPrev = viewer.querySelector('.slide-nav--prev');
+    const btnNext = viewer.querySelector('.slide-nav--next');
+    let current   = 0;
+
+    function goTo(i) {
+      imgs[current].classList.remove('active');
+      if (thumbs.length) thumbs[current].classList.remove('active');
+      current = (i + imgs.length) % imgs.length;
+      imgs[current].classList.add('active');
+      if (thumbs.length) {
+        thumbs[current].classList.add('active');
+        thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+      if (counter) counter.textContent = `${current + 1} / ${imgs.length}`;
+    }
+
+    btnPrev?.addEventListener('click', e => { e.stopPropagation(); goTo(current - 1); });
+    btnNext?.addEventListener('click', e => { e.stopPropagation(); goTo(current + 1); });
+    thumbs.forEach((th, i) => th.addEventListener('click', () => goTo(i)));
+  });
+
+  // ── Lightbox ──
   const lightbox = document.getElementById('lightbox');
   const lbImg    = document.getElementById('lightbox-img');
   const lbClose  = document.getElementById('lightbox-close');
@@ -236,7 +269,7 @@ if (yearEl) {
   const backdrop = document.getElementById('lightbox-backdrop');
   if (!lightbox) return;
 
-  let gallery = [];  // current set of images
+  let gallery = [];
   let index   = 0;
 
   function open(imgs, i) {
@@ -265,12 +298,12 @@ if (yearEl) {
     lbNext.classList.toggle('hidden', gallery.length <= 1);
   }
 
-  // Wire up all gallery images
-  document.querySelectorAll('.slide-gallery img').forEach(img => {
+  // Click on active slide-img opens lightbox with all imgs in that viewer
+  document.querySelectorAll('.slide-img').forEach(img => {
     img.addEventListener('click', () => {
-      // Collect all imgs in the same slide-gallery
-      const siblings = Array.from(img.closest('.slide-gallery').querySelectorAll('img'));
-      open(siblings, siblings.indexOf(img));
+      const allImgs = Array.from(img.closest('.slide-viewer-images').querySelectorAll('.slide-img'));
+      const active  = allImgs.findIndex(el => el.classList.contains('active'));
+      open(allImgs, active);
     });
   });
 
@@ -281,9 +314,9 @@ if (yearEl) {
 
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('open')) return;
-    if (e.key === 'Escape')      close();
-    if (e.key === 'ArrowLeft')   show(index - 1);
-    if (e.key === 'ArrowRight')  show(index + 1);
+    if (e.key === 'Escape')     close();
+    if (e.key === 'ArrowLeft')  show(index - 1);
+    if (e.key === 'ArrowRight') show(index + 1);
   });
 })();
 

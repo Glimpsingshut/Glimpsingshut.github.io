@@ -22,6 +22,17 @@
   <!-- Neon waves canvas -->
   <canvas id="neon-waves" aria-hidden="true"></canvas>
 
+  <!-- Lightbox -->
+  <div id="lightbox" aria-hidden="true" role="dialog" aria-modal="true">
+    <div id="lightbox-backdrop"></div>
+    <button id="lightbox-close" aria-label="Close">✕</button>
+    <button id="lightbox-prev" aria-label="Previous">‹</button>
+    <div id="lightbox-content">
+      <img id="lightbox-img" src="" alt="" />
+    </div>
+    <button id="lightbox-next" aria-label="Next">›</button>
+  </div>
+
   <!-- Custom cursor trail (desktop only) -->
   <canvas id="cursor-canvas" aria-hidden="true"></canvas>
 
@@ -230,13 +241,18 @@
         <!-- Pista del carrusel: contenedor que se mueve horizontalmente -->
         <div class="carousel-track">
 
-          <!-- Slide 1 — Comida -->
+          <!-- Slide 1 — Comida (Opción B: una foto a la vez) -->
           <div class="carousel-slide">
-            <div class="slide-gallery slide-gallery--2col">
-              <img src="images/Comida1.JPG" alt="Comida 1" />
-              <img src="images/Comida2.JPG" alt="Comida 2" />
-              <img src="images/Comida3.jpeg" alt="Comida 3" />
-              <img src="images/Comida4.jpeg" alt="Comida 4" />
+            <div class="slide-viewer">
+              <div class="slide-viewer-images">
+                <img src="images/Comida1.JPG"  alt="Comida 1"  class="slide-img active" />
+                <img src="images/Comida2.JPG"  alt="Comida 2"  class="slide-img" />
+                <img src="images/Comida3.jpeg" alt="Comida 3"  class="slide-img" />
+                <img src="images/Comida4.jpeg" alt="Comida 4"  class="slide-img" />
+              </div>
+              <button class="slide-nav slide-nav--prev" aria-label="Anterior">‹</button>
+              <button class="slide-nav slide-nav--next" aria-label="Siguiente">›</button>
+              <span class="slide-counter">1 / 4</span>
             </div>
             <div class="slide-caption">
               <span class="slide-emoji">🍽️</span>
@@ -245,17 +261,34 @@
             </div>
           </div>
 
-          <!-- Slide 2 — Naturaleza -->
+          <!-- Slide 2 — Naturaleza (Opción C: foto grande + tira de miniaturas) -->
           <div class="carousel-slide">
-            <div class="slide-gallery slide-gallery--4col">
-              <img src="images/Naturaleza1.JPEG" alt="Naturaleza 1" />
-              <img src="images/Naturaleza2.JPG"  alt="Naturaleza 2" />
-              <img src="images/Naturaleza3.JPG"  alt="Naturaleza 3" />
-              <img src="images/Naturaleza4.JPG"  alt="Naturaleza 4" />
-              <img src="images/Naturaleza5.JPG"  alt="Naturaleza 5" />
-              <img src="images/Naturaleza6.JPG"  alt="Naturaleza 6" />
-              <img src="images/Naturaleza7.JPG"  alt="Naturaleza 7" />
-              <img src="images/Naturaleza8.jpeg" alt="Naturaleza 8" />
+            <div class="slide-viewer slide-viewer--thumbs">
+              <div class="slide-viewer-main">
+                <div class="slide-viewer-images">
+                  <img src="images/Naturaleza1.JPEG" alt="Naturaleza 1" class="slide-img active" />
+                  <img src="images/Naturaleza2.JPG"  alt="Naturaleza 2" class="slide-img" />
+                  <img src="images/Naturaleza3.JPG"  alt="Naturaleza 3" class="slide-img" />
+                  <img src="images/Naturaleza4.JPG"  alt="Naturaleza 4" class="slide-img" />
+                  <img src="images/Naturaleza5.JPG"  alt="Naturaleza 5" class="slide-img" />
+                  <img src="images/Naturaleza6.JPG"  alt="Naturaleza 6" class="slide-img" />
+                  <img src="images/Naturaleza7.JPG"  alt="Naturaleza 7" class="slide-img" />
+                  <img src="images/Naturaleza8.jpeg" alt="Naturaleza 8" class="slide-img" />
+                </div>
+                <button class="slide-nav slide-nav--prev" aria-label="Anterior">‹</button>
+                <button class="slide-nav slide-nav--next" aria-label="Siguiente">›</button>
+                <span class="slide-counter">1 / 8</span>
+              </div>
+              <div class="slide-thumbs">
+                <img src="images/Naturaleza1.JPEG" alt="Naturaleza 1" class="slide-thumb active" />
+                <img src="images/Naturaleza2.JPG"  alt="Naturaleza 2" class="slide-thumb" />
+                <img src="images/Naturaleza3.JPG"  alt="Naturaleza 3" class="slide-thumb" />
+                <img src="images/Naturaleza4.JPG"  alt="Naturaleza 4" class="slide-thumb" />
+                <img src="images/Naturaleza5.JPG"  alt="Naturaleza 5" class="slide-thumb" />
+                <img src="images/Naturaleza6.JPG"  alt="Naturaleza 6" class="slide-thumb" />
+                <img src="images/Naturaleza7.JPG"  alt="Naturaleza 7" class="slide-thumb" />
+                <img src="images/Naturaleza8.jpeg" alt="Naturaleza 8" class="slide-thumb" />
+              </div>
             </div>
             <div class="slide-caption">
               <span class="slide-emoji">🌿</span>
@@ -264,12 +297,17 @@
             </div>
           </div>
 
-          <!-- Slide 3 — Conciertos -->
+          <!-- Slide 3 — Conciertos (Opción B: una foto a la vez) -->
           <div class="carousel-slide">
-            <div class="slide-gallery slide-gallery--concerts">
-              <img src="images/Conciertos1.JPG"  alt="Concierto 1" class="concert-main" />
-              <img src="images/Conciertos2.JPG"  alt="Concierto 2" />
-              <img src="images/Conciertos3.jpeg" alt="Concierto 3" />
+            <div class="slide-viewer">
+              <div class="slide-viewer-images">
+                <img src="images/Conciertos1.JPG"  alt="Concierto 1" class="slide-img active" />
+                <img src="images/Conciertos2.JPG"  alt="Concierto 2" class="slide-img" />
+                <img src="images/Conciertos3.jpeg" alt="Concierto 3" class="slide-img" />
+              </div>
+              <button class="slide-nav slide-nav--prev" aria-label="Anterior">‹</button>
+              <button class="slide-nav slide-nav--next" aria-label="Siguiente">›</button>
+              <span class="slide-counter">1 / 3</span>
             </div>
             <div class="slide-caption">
               <span class="slide-emoji">🎵</span>

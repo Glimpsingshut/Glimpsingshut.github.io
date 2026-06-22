@@ -803,48 +803,125 @@ ul { list-style: none; }
 }
 
 /* Galería multi-imagen */
-.slide-gallery {
-  display: grid;
-  gap: 3px;
+/* ── Opción B: un foto a la vez ── */
+.slide-viewer {
+  position: relative;
+  border-radius: 12px;
   overflow: hidden;
-  background: var(--color-border);
+  background: #0d0f1a;
+  aspect-ratio: 4 / 3;
 }
 
-.slide-gallery img {
+.slide-viewer-images {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  aspect-ratio: 1;
-  transition: transform 0.5s ease, filter 0.3s ease;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  cursor: zoom-in;
   display: block;
 }
 
-.carousel-slide:hover .slide-gallery img {
-  transform: scale(1.05);
+.slide-img.active {
+  opacity: 1;
 }
 
-/* 2 columnas — Comida (2×2) */
-.slide-gallery--2col {
-  grid-template-columns: repeat(2, 1fr);
+/* Flechas dentro del viewer */
+.slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  background: rgba(5,6,14,0.55);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #fff;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.slide-nav:hover {
+  background: rgba(90,175,255,0.25);
+  transform: translateY(-50%) scale(1.1);
+}
+.slide-nav--prev { left: 10px; }
+.slide-nav--next { right: 10px; }
+
+/* Counter "1 / 4" */
+.slide-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  z-index: 2;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255,255,255,0.75);
+  background: rgba(5,6,14,0.5);
+  backdrop-filter: blur(4px);
+  padding: 3px 9px;
+  border-radius: 20px;
+  pointer-events: none;
 }
 
-/* 4 columnas — Naturaleza (4×2) */
-.slide-gallery--4col {
-  grid-template-columns: repeat(4, 1fr);
-}
-.slide-gallery--4col img {
-  aspect-ratio: 1;
-}
-
-/* Conciertos — imagen grande arriba + 2 abajo */
-.slide-gallery--concerts {
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 2fr 1fr;
+/* ── Opción C: foto grande + tira de miniaturas ── */
+.slide-viewer--thumbs {
+  aspect-ratio: unset;
+  background: transparent;
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
-.slide-gallery--concerts .concert-main {
-  grid-column: 1 / -1;
-  aspect-ratio: 16 / 7;
+.slide-viewer-main {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0d0f1a;
+  aspect-ratio: 4 / 3;
+  flex-shrink: 0;
+}
+
+.slide-thumbs {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+.slide-thumbs::-webkit-scrollbar { display: none; }
+
+.slide-thumb {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 7px;
+  cursor: pointer;
+  opacity: 0.5;
+  border: 2px solid transparent;
+  transition: opacity 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.slide-thumb:hover { opacity: 0.8; transform: scale(1.05); }
+.slide-thumb.active {
+  opacity: 1;
+  border-color: rgba(90,175,255,0.8);
 }
 
 /* Placeholder cuando no hay imagen */
@@ -1307,6 +1384,121 @@ ul { list-style: none; }
 [data-theme="light"] .aurora-blob--c {
   background: radial-gradient(circle, rgba(201,82,46,0.20) 0%, transparent 65%);
   filter: blur(55px);
+}
+
+/* ===== LIGHTBOX ===== */
+#lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#lightbox.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 6, 14, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#lightbox-content {
+  position: relative;
+  z-index: 1;
+  max-width: 72vw;
+  max-height: 78vh;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  background: #0d0f1a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#lightbox-img {
+  max-width: 72vw;
+  max-height: 78vh;
+  object-fit: contain;
+  display: block;
+  border-radius: 14px;
+  transition: opacity 0.2s ease;
+}
+
+#lightbox-img.switching {
+  opacity: 0;
+}
+
+#lightbox-close {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 0.5px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+#lightbox-close:hover {
+  background: rgba(255,255,255,0.2);
+  transform: scale(1.1);
+}
+
+#lightbox-prev,
+#lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  border: 0.5px solid rgba(255,255,255,0.15);
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(6px);
+  line-height: 1;
+}
+
+#lightbox-prev { left: 1rem; }
+#lightbox-next { right: 1rem; }
+
+#lightbox-prev:hover,
+#lightbox-next:hover {
+  background: rgba(255,255,255,0.18);
+  transform: translateY(-50%) scale(1.08);
+}
+
+#lightbox-prev.hidden,
+#lightbox-next.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ===== NEON WAVES ===== */
