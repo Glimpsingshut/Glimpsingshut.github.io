@@ -1585,6 +1585,18 @@ ul { list-style: none; }
 .timeline-item.visible .timeline-tags span {
   opacity: 1;
   transform: scale(1) translateY(0);
+  animation: tag-glow-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes tag-glow-pulse {
+  0%, 100% {
+    border-color: rgba(226,105,74,0.2);
+    box-shadow: none;
+  }
+  50% {
+    border-color: rgba(226,105,74,0.65);
+    box-shadow: 0 0 7px rgba(226,105,74,0.2);
+  }
 }
 /* Delays escalonados — cubre hasta 10 tags */
 .timeline-item.visible .timeline-tags span:nth-child(1)  { transition-delay: 0.60s; }
