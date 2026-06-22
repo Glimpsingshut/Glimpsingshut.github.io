@@ -1708,15 +1708,20 @@ ul { list-style: none; }
     grid-template-columns: 1fr;
   }
 
-  /* Viewer 16:9 en móvil — más horizontal, mejor para fotos */
-  .slide-viewer,
-  .slide-viewer-main {
-    aspect-ratio: 16 / 9;
-    border-radius: 10px 10px 0 0;
+  /* Viewer en móvil.
+     El viewer (flex-shrink:0, aspect-ratio:4/3) expande la columna del grid
+     a ~403px. Con overflow:hidden lo contenemos en la celda del grid,
+     y aspect-ratio 16/9 + flex-shrink:1 hacen que el main se ajuste al ancho. */
+  .slide-viewer--thumbs {
+    overflow: hidden;
+    gap: 0;
   }
 
-  .slide-viewer--thumbs {
-    gap: 0;
+  .slide-viewer-main {
+    flex-shrink: 1;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px 10px 0 0;
   }
 
   /* Thumbnails más pequeñas */
@@ -1730,6 +1735,25 @@ ul { list-style: none; }
   .slide-caption {
     padding: 1.25rem 1rem 1rem;
     gap: 0.4rem;
+    overflow: visible;
+    height: auto;
+  }
+
+  /* En mobile el carousel no puede tener overflow:hidden fijo — el caption
+     queda debajo del viewer y se cortaría.
+     overflow-x: clip recorta los slides laterales sin crear un scroll container,
+     permitiendo que el caption crezca verticalmente sin cortarse. */
+  .carousel {
+    overflow-x: clip;
+    overflow-y: visible;
+  }
+
+  .carousel-track {
+    align-items: flex-start;
+  }
+
+  .carousel-slide {
+    overflow: visible;
   }
 
   .slide-caption h3 { font-size: var(--font-size-base); }
