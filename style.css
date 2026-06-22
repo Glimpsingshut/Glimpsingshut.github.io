@@ -802,6 +802,51 @@ ul { list-style: none; }
   transform: scale(1.04);
 }
 
+/* Galería multi-imagen */
+.slide-gallery {
+  display: grid;
+  gap: 3px;
+  overflow: hidden;
+  background: var(--color-border);
+}
+
+.slide-gallery img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 1;
+  transition: transform 0.5s ease, filter 0.3s ease;
+  display: block;
+}
+
+.carousel-slide:hover .slide-gallery img {
+  transform: scale(1.05);
+}
+
+/* 2 columnas — Comida (2×2) */
+.slide-gallery--2col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* 4 columnas — Naturaleza (4×2) */
+.slide-gallery--4col {
+  grid-template-columns: repeat(4, 1fr);
+}
+.slide-gallery--4col img {
+  aspect-ratio: 1;
+}
+
+/* Conciertos — imagen grande arriba + 2 abajo */
+.slide-gallery--concerts {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 2fr 1fr;
+}
+
+.slide-gallery--concerts .concert-main {
+  grid-column: 1 / -1;
+  aspect-ratio: 16 / 7;
+}
+
 /* Placeholder cuando no hay imagen */
 .slide-image.placeholder {
   display: flex;
