@@ -1455,8 +1455,8 @@ ul { list-style: none; }
 
 /* Logo de empresa */
 .company-logo {
-  width: 28px;
-  height: 28px;
+  width: 48px;
+  height: 48px;
   border-radius: 5px;
   object-fit: cover;
   flex-shrink: 0;
