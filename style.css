@@ -103,11 +103,23 @@ body {
   overflow-x: hidden;
   font-family: var(--font-sans);
   background-color: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 70% 50% at 88% 8%,  rgba(90,140,255,0.11) 0%, transparent 100%),
+    radial-gradient(ellipse 55% 45% at 8%  92%,  rgba(226,105,74,0.09) 0%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E");
+  background-attachment: fixed;
   color: var(--color-text);
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
+}
+
+[data-theme="light"] body {
+  background-image:
+    radial-gradient(ellipse 70% 50% at 88% 8%,  rgba(60,120,255,0.07) 0%, transparent 100%),
+    radial-gradient(ellipse 55% 45% at 8%  92%,  rgba(226,105,74,0.06) 0%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
 }
 
 h1, h2, h3, h4 {
