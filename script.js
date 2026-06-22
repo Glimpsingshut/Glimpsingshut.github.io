@@ -338,10 +338,24 @@ if (yearEl) {
     let current   = 0;
 
     function goTo(i) {
-      imgs[current].classList.remove('active');
+      const outgoing = imgs[current];
+
+      // Marca la foto saliente: se aleja y desvanece
+      outgoing.classList.remove('active');
+      outgoing.classList.add('leaving');
+      setTimeout(() => outgoing.classList.remove('leaving'), 520);
+
       if (thumbs.length) thumbs[current].classList.remove('active');
       current = (i + imgs.length) % imgs.length;
-      imgs[current].classList.add('active');
+
+      // Fuerza replay de la animación en la foto entrante
+      const incoming = imgs[current];
+      incoming.style.animation = 'none';
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { incoming.style.animation = ''; });
+      });
+      incoming.classList.add('active');
+
       if (thumbs.length) {
         thumbs[current].classList.add('active');
         thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
