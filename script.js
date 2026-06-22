@@ -226,6 +226,68 @@ if (yearEl) {
 }
 
 
+// ===== 7. LIGHTBOX =====
+(function () {
+  const lightbox = document.getElementById('lightbox');
+  const lbImg    = document.getElementById('lightbox-img');
+  const lbClose  = document.getElementById('lightbox-close');
+  const lbPrev   = document.getElementById('lightbox-prev');
+  const lbNext   = document.getElementById('lightbox-next');
+  const backdrop = document.getElementById('lightbox-backdrop');
+  if (!lightbox) return;
+
+  let gallery = [];  // current set of images
+  let index   = 0;
+
+  function open(imgs, i) {
+    gallery = imgs;
+    show(i);
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  function show(i) {
+    index = (i + gallery.length) % gallery.length;
+    lbImg.classList.add('switching');
+    setTimeout(() => {
+      lbImg.src = gallery[index].src;
+      lbImg.alt = gallery[index].alt;
+      lbImg.classList.remove('switching');
+    }, 180);
+    lbPrev.classList.toggle('hidden', gallery.length <= 1);
+    lbNext.classList.toggle('hidden', gallery.length <= 1);
+  }
+
+  // Wire up all gallery images
+  document.querySelectorAll('.slide-gallery img').forEach(img => {
+    img.addEventListener('click', () => {
+      // Collect all imgs in the same slide-gallery
+      const siblings = Array.from(img.closest('.slide-gallery').querySelectorAll('img'));
+      open(siblings, siblings.indexOf(img));
+    });
+  });
+
+  lbClose.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  lbPrev.addEventListener('click', () => show(index - 1));
+  lbNext.addEventListener('click', () => show(index + 1));
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape')      close();
+    if (e.key === 'ArrowLeft')   show(index - 1);
+    if (e.key === 'ArrowRight')  show(index + 1);
+  });
+})();
+
+
 // ===== 7. AURORA PARALLAX =====
 (function () {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
