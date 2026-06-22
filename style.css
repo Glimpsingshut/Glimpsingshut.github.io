@@ -1695,66 +1695,167 @@ ul { list-style: none; }
 .timeline-item.visible .timeline-tags span:nth-child(10) { transition-delay: 1.23s; }
 
 /* ===== EDUCATION & CERTIFICATIONS ===== */
-.edu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-
-.edu-block {
+/* Education featured card */
+.edu-featured {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 14px;
-  padding: 1.6rem;
+  padding: 1.4rem 1.6rem;
+  margin-bottom: 2rem;
 }
 
-.edu-block-title {
-  font-size: var(--font-size-sm);
-  font-weight: 600;
-  color: var(--color-text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin: 0 0 1.4rem;
+.edu-featured-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(96,200,255,0.1);
+  border: 1px solid rgba(96,200,255,0.2);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #60c8ff;
 }
 
-.edu-list {
+.edu-featured-body {
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
+  gap: 0.2rem;
+  flex: 1;
 }
 
-.edu-item {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
-
-.edu-year {
-  font-size: 0.75rem;
-  color: var(--color-accent);
-  font-weight: 600;
-  min-width: 2.8rem;
-  padding-top: 0.15rem;
-}
-
-.edu-detail {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.edu-detail strong {
+.edu-featured-body strong {
   font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--color-text);
+  line-height: 1.4;
 }
 
-.edu-detail span {
+.edu-featured-body span {
   font-size: 0.78rem;
   color: var(--color-text-muted);
+}
+
+.edu-featured-year {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #60c8ff;
+  background: rgba(96,200,255,0.1);
+  border: 1px solid rgba(96,200,255,0.2);
+  border-radius: 99px;
+  padding: 0.25rem 0.7rem;
+  flex-shrink: 0;
+}
+
+/* Certifications label */
+.edu-certs-label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  opacity: 0.6;
+  margin-bottom: 1.2rem;
+}
+
+/* Badge wall */
+.badge-wall {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.cert-badge {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  padding: 1.4rem 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.55rem;
+  position: relative;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.cert-badge:hover {
+  border-color: rgba(124,111,255,0.35);
+  transform: translateY(-2px);
+}
+
+.cert-badge-year {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  opacity: 0.7;
+}
+
+.cert-hex {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.2rem;
+}
+
+.cert-hex svg:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.cert-hex svg:last-child {
+  position: relative;
+  z-index: 1;
+}
+
+.cert-badge-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.cert-badge-issuer {
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.cert-badge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-top: 0.2rem;
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.cert-badge-link:hover {
+  opacity: 1;
+  color: #60c8ff;
+}
+
+[data-theme="light"] .edu-featured-icon {
+  background: rgba(96,150,255,0.08);
+  border-color: rgba(96,150,255,0.2);
+  color: #1a56db;
+}
+
+[data-theme="light"] .edu-featured-year {
+  color: #1a56db;
+  background: rgba(96,150,255,0.08);
+  border-color: rgba(96,150,255,0.2);
 }
 
 @media (max-width: 600px) {
