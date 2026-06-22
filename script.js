@@ -124,13 +124,18 @@ document.querySelectorAll('.reveal').forEach(el => {
 
 const navbar = document.querySelector('.navbar');
 
+const scrollIndicator = document.querySelector('.scroll-indicator');
+
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    navbar?.classList.add('scrolled');
-  } else {
-    navbar?.classList.remove('scrolled');
+  const y = window.scrollY;
+
+  navbar?.classList.toggle('scrolled', y > 50);
+
+  // Scroll indicator desaparece suavemente al empezar a bajar
+  if (scrollIndicator) {
+    scrollIndicator.classList.toggle('hidden', y > 80);
   }
-});
+}, { passive: true });
 
 // Agrega esto al CSS si quieres el efecto de sombra:
 // .navbar.scrolled { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
