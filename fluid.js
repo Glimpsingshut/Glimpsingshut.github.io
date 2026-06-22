@@ -42,7 +42,7 @@ let config = {
     SPLAT_FORCE: 2500,
     SHADING: false,
     COLORFUL: true,
-    COLOR_UPDATE_SPEED: 4,
+    COLOR_UPDATE_SPEED: 1,
     PAUSED: false,
     BACK_COLOR: { r: 0, g: 0, b: 0 },
     TRANSPARENT: false,
@@ -1463,10 +1463,10 @@ function correctDeltaY (delta) {
 }
 
 function generateColor () {
-    let c = HSVtoRGB(Math.random(), 0.7, 0.9);
-    c.r *= 0.18;
-    c.g *= 0.18;
-    c.b *= 0.18;
+    let c = HSVtoRGB(Math.random(), 0.6, 0.55);
+    c.r *= 0.08;
+    c.g *= 0.08;
+    c.b *= 0.08;
     return c;
 }
 
