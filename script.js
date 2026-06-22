@@ -176,22 +176,32 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
   const text = el.textContent.trim();
   el.textContent = '';
 
+  // Velocidad humana: base 90ms ± hasta 55ms de variación aleatoria
+  // Pausa extra después de puntuación para imitar ritmo natural
+  function humanDelay(char) {
+    const base = 90;
+    const jitter = Math.random() * 55;
+    const pause = /[·\-,.]/.test(char) ? 120 : 0;
+    return base + jitter + pause;
+  }
+
   function startTyping() {
     let i = 0;
     el.classList.add('typewriter');
+
     function type() {
       if (i < text.length) {
-        el.textContent += text[i++];
-        setTimeout(type, 52);
+        el.textContent += text[i];
+        setTimeout(type, humanDelay(text[i++]));
       } else {
-        setTimeout(() => el.classList.remove('typewriter'), 1600);
+        // Cursor parpadea 2.5s luego desaparece
+        setTimeout(() => el.classList.remove('typewriter'), 2500);
       }
     }
     type();
   }
 
   if (overlay) {
-    // Observe when the overlay is removed from DOM (intro finished)
     const obs = new MutationObserver(() => {
       if (!document.getElementById('fire-overlay')) {
         obs.disconnect();
