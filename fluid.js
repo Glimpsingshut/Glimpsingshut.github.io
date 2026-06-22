@@ -38,7 +38,7 @@ let config = {
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 20,
     CURL: 30,
-    SPLAT_RADIUS: 0.12,
+    SPLAT_RADIUS: 0.07,
     SPLAT_FORCE: 5000,
     SHADING: true,
     COLORFUL: true,
@@ -1464,9 +1464,9 @@ function correctDeltaY (delta) {
 
 function generateColor () {
     let c = HSVtoRGB(Math.random(), 1.0, 1.0);
-    c.r *= 0.15;
-    c.g *= 0.15;
-    c.b *= 0.15;
+    c.r *= 0.5;
+    c.g *= 0.5;
+    c.b *= 0.5;
     return c;
 }
 
