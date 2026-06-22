@@ -33,13 +33,13 @@ let config = {
     SIM_RESOLUTION: 128,
     DYE_RESOLUTION: 1440,
     CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 0.93,
-    VELOCITY_DISSIPATION: 0.95,
+    DENSITY_DISSIPATION: 0.88,
+    VELOCITY_DISSIPATION: 0.92,
     PRESSURE: 0.8,
     PRESSURE_ITERATIONS: 20,
     CURL: 12,
-    SPLAT_RADIUS: 0.07,
-    SPLAT_FORCE: 5000,
+    SPLAT_RADIUS: 0.05,
+    SPLAT_FORCE: 3500,
     SHADING: false,
     COLORFUL: true,
     COLOR_UPDATE_SPEED: 4,
@@ -1464,9 +1464,9 @@ function correctDeltaY (delta) {
 
 function generateColor () {
     let c = HSVtoRGB(Math.random(), 0.7, 0.9);
-    c.r *= 0.7;
-    c.g *= 0.7;
-    c.b *= 0.7;
+    c.r *= 0.3;
+    c.g *= 0.3;
+    c.b *= 0.3;
     return c;
 }
 
