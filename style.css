@@ -93,6 +93,17 @@
   --btn-cv-border: rgba(226,105,74,0.4);
 }
 
+/* ===== FLUID CURSOR CANVAS ===== */
+#fluid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  pointer-events: none;
+}
+
 /* ===== RESET y BASE ===== */
 *, *::before, *::after {
   box-sizing: border-box;
