@@ -200,15 +200,17 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
   function begin() {
     const chars  = text.split('');
     const locked = new Array(chars.length).fill(false);
-    const TOTAL  = 1800; // ms hasta que el último caracter se fija
+    const TOTAL  = 2800; // ms hasta que el último caracter se fija
     const FRAME  = 45;   // ms entre frames de scramble
 
     el.textContent = text.replace(/./g, () => randomChar()); // muestra todo scrambled de entrada
     el.classList.add('typewriter');
 
     // Cada posición se fija en un momento escalonado (izq → der + pequeña variación)
+    // Derecha → izquierda: el último índice se fija primero
     chars.forEach((_, i) => {
-      const t = (i / chars.length) * TOTAL * 0.85 + Math.random() * 140;
+      const reversed = chars.length - 1 - i;
+      const t = (reversed / chars.length) * TOTAL * 0.85 + Math.random() * 140;
       setTimeout(() => { locked[i] = true; }, t);
     });
 
