@@ -1371,6 +1371,7 @@ ul { list-style: none; }
 .timeline-item:nth-child(1) { transition-delay: 0.05s; }
 .timeline-item:nth-child(2) { transition-delay: 0.22s; }
 .timeline-item:nth-child(3) { transition-delay: 0.39s; }
+.timeline-item:nth-child(4) { transition-delay: 0.56s; }
 
 .timeline-marker {
   position: absolute;
@@ -1395,8 +1396,9 @@ ul { list-style: none; }
 }
 
 /* Desfase entre dots para que no pulsen en sincronía */
-.timeline-item:nth-child(2) .timeline-marker::after { animation-delay: 0.8s; }
-.timeline-item:nth-child(3) .timeline-marker::after { animation-delay: 1.6s; }
+.timeline-item:nth-child(2) .timeline-marker::after { animation-delay: 0.6s; }
+.timeline-item:nth-child(3) .timeline-marker::after { animation-delay: 1.2s; }
+.timeline-item:nth-child(4) .timeline-marker::after { animation-delay: 1.8s; }
 
 @keyframes radar-ping {
   0%   { transform: scale(1);   opacity: 0.75; }
@@ -1410,6 +1412,30 @@ ul { list-style: none; }
   border-radius: 14px;
   padding: 1.4rem 1.6rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Empresa como header cuando agrupa varios roles */
+.timeline-company--header {
+  display: block;
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.03em;
+  margin-bottom: 1rem;
+}
+
+/* Bloque individual de un rol dentro de una tarjeta agrupada */
+.timeline-role-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Separador entre roles de la misma empresa */
+.timeline-role-divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 1.1rem 0;
 }
 
 .timeline-card:hover {
