@@ -307,8 +307,14 @@ ul { list-style: none; }
   background-color: rgba(124,111,255,0.1);
   color: #a89fff;
   border-color: rgba(124,111,255,0.4);
-  box-shadow: none;
+  box-shadow: 0 4px 16px rgba(124,111,255,0.2);
   overflow: hidden;
+  animation: btn-pulse-purple 2.8s ease-in-out infinite;
+}
+
+@keyframes btn-pulse-purple {
+  0%, 100% { box-shadow: 0 4px 16px rgba(124,111,255,0.2); }
+  50%       { box-shadow: 0 4px 28px rgba(124,111,255,0.5), 0 0 40px rgba(124,111,255,0.15); }
 }
 
 .btn-contact::before {
@@ -319,7 +325,7 @@ ul { list-style: none; }
   color: #fff;
   background-color: rgba(124,111,255,0.2);
   border-color: rgba(124,111,255,0.7);
-  box-shadow: 0 4px 18px rgba(124,111,255,0.25);
+  box-shadow: 0 8px 28px rgba(124,111,255,0.4);
   animation: none;
 }
 
@@ -345,15 +351,22 @@ ul { list-style: none; }
   background-color: var(--btn-cv-bg);
   color: var(--btn-cv-color);
   border-color: var(--btn-cv-border);
-  box-shadow: none;
+  box-shadow: 0 4px 16px rgba(52,211,153,0.2);
+  animation: btn-pulse-emerald 2.8s ease-in-out infinite;
+}
+
+@keyframes btn-pulse-emerald {
+  0%, 100% { box-shadow: 0 4px 16px rgba(52,211,153,0.2); }
+  50%       { box-shadow: 0 4px 28px rgba(52,211,153,0.5), 0 0 40px rgba(52,211,153,0.15); }
 }
 
 .btn-cv::before {
-  background-color: rgba(226,105,74,0.12);
+  background-color: rgba(52,211,153,0.1);
 }
 
 .btn-cv:hover {
-  box-shadow: 0 8px 24px rgba(226,105,74,0.15);
+  box-shadow: 0 8px 28px rgba(52,211,153,0.35);
+  animation: none;
 }
 
 .btn-cv:hover::before {
