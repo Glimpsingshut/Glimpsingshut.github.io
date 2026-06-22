@@ -57,6 +57,11 @@ let config = {
     SUNRAYS_WEIGHT: 1.0,
 }
 
+window.fluidConfig = config;
+if (document.documentElement.getAttribute('data-theme') === 'light') {
+    config.BACK_COLOR = { r: 255, g: 255, b: 255 };
+}
+
 function pointerPrototype () {
     this.id = -1;
     this.texcoordX = 0;

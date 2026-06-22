@@ -16,12 +16,23 @@ const html = document.documentElement;
 const savedTheme = localStorage.getItem('theme') || 'dark';
 html.setAttribute('data-theme', savedTheme);
 
+function applyFluidTheme(theme) {
+  if (!window.fluidConfig) return;
+  if (theme === 'light') {
+    window.fluidConfig.BACK_COLOR = { r: 255, g: 255, b: 255 };
+  } else {
+    window.fluidConfig.BACK_COLOR = { r: 0, g: 0, b: 0 };
+  }
+}
+
 themeToggle?.addEventListener('click', () => {
   const current = html.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
+  applyFluidTheme(next);
 });
+
 
 
 // ===== 2. ACTIVE NAV ON SCROLL =====
