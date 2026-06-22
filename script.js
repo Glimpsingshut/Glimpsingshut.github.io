@@ -20,6 +20,26 @@ themeToggle?.addEventListener('click', () => {
 });
 
 
+// ===== 2. ACTIVE NAV ON SCROLL =====
+(function () {
+  const sections = document.querySelectorAll('section[id]');
+  const links    = document.querySelectorAll('.nav-links a');
+  if (!sections.length || !links.length) return;
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      links.forEach(a => {
+        a.classList.toggle('nav-active', a.getAttribute('href') === `#${id}`);
+      });
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(s => observer.observe(s));
+})();
+
+
 // ===== 2. NAV PILL HIGHLIGHT =====
 (function () {
   const pill  = document.querySelector('.nav-pill');
@@ -121,12 +141,68 @@ document.head.appendChild(style);
 
 
 // ===== 4. ANIMACIÓN DE DELAY ESCALONADO EN TARJETAS =====
-// Hace que cada tarjeta de proyecto aparezca un poco después
-// de la anterior, dando un efecto de cascada.
-
 document.querySelectorAll('.project-card').forEach((card, index) => {
   card.style.transitionDelay = `${index * 0.1}s`;
 });
+
+
+// ===== 4b. 3D TILT EN PROJECT CARDS =====
+(function () {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width  - 0.5;
+      const y = (e.clientY - rect.top)  / rect.height - 0.5;
+      card.style.transform = `perspective(700px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-4px) scale(1.02)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease';
+      card.style.transform  = '';
+      setTimeout(() => { card.style.transition = ''; }, 500);
+    });
+  });
+})();
+
+
+// ===== 4c. TYPEWRITER EN HERO TAGLINE =====
+(function () {
+  const el      = document.querySelector('.tagline-fire');
+  const overlay = document.getElementById('fire-overlay');
+  if (!el) return;
+
+  const text = el.textContent.trim();
+  el.textContent = '';
+
+  function startTyping() {
+    let i = 0;
+    el.classList.add('typewriter');
+    function type() {
+      if (i < text.length) {
+        el.textContent += text[i++];
+        setTimeout(type, 52);
+      } else {
+        setTimeout(() => el.classList.remove('typewriter'), 1600);
+      }
+    }
+    type();
+  }
+
+  if (overlay) {
+    // Observe when the overlay is removed from DOM (intro finished)
+    const obs = new MutationObserver(() => {
+      if (!document.getElementById('fire-overlay')) {
+        obs.disconnect();
+        setTimeout(startTyping, 200);
+      }
+    });
+    obs.observe(document.body, { childList: true, subtree: true });
+  } else {
+    setTimeout(startTyping, 400);
+  }
+})();
 
 
 // ===== 5. CARRUSEL DE HOBBIES =====
