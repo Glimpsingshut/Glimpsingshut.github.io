@@ -177,9 +177,9 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
   el.textContent = '';
 
   function humanDelay(char) {
-    const base   = 90;
-    const jitter = Math.random() * 55;
-    const pause  = /[·\-,.]/.test(char) ? 130 : 0;
+    const base   = 160;
+    const jitter = Math.random() * 80;
+    const pause  = /[·\-,.]/.test(char) ? 220 : 0;
     return base + jitter + pause;
   }
 
