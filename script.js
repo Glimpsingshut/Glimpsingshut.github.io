@@ -2,6 +2,10 @@
 // SCRIPT.JS — Interactividad de la página
 // =============================================
 
+// Siempre arrancar desde el top al cargar
+history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 // ===== 1. TOGGLE DARK / LIGHT MODE =====
 // Guarda la preferencia en localStorage para que se recuerde al recargar
 
