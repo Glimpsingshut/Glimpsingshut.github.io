@@ -189,22 +189,29 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
     return base + jitter + pause;
   }
 
-  // Opción 4: glitch de 3 caracteres falsos antes de escribir correctamente
+  // Opción 4: cada carácter muestra 3 frames de glitch antes de fijarse
   function glitchThenType() {
-    let glitches = 0;
-    const MAX_GLITCH = 3;
+    el.textContent = '';
+    setTimeout(startTyping, 120);
+  }
 
-    function showGlitch() {
-      if (glitches < MAX_GLITCH) {
-        el.textContent = randomChar() + randomChar() + randomChar();
-        glitches++;
-        setTimeout(showGlitch, 80);
+  // Escribe un carácter con glitch: muestra chars aleatorios → fija el real
+  function typeCharWithGlitch(typed, realChar, done) {
+    const FRAMES = 4;   // cuántos frames falsos por letra
+    const FRAME_MS = 55; // duración de cada frame falso
+    let f = 0;
+
+    function frame() {
+      if (f < FRAMES) {
+        el.textContent = typed + randomChar();
+        f++;
+        setTimeout(frame, FRAME_MS);
       } else {
-        el.textContent = '';
-        setTimeout(startTyping, 120);
+        el.textContent = typed + realChar;
+        done();
       }
     }
-    showGlitch();
+    frame();
   }
 
   // Opción 2: highlight al terminar de escribir
@@ -219,8 +226,12 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
 
     function type() {
       if (i < text.length) {
-        el.textContent += text[i];
-        setTimeout(type, humanDelay(text[i++]));
+        const typed   = text.slice(0, i);
+        const realChar = text[i];
+        i++;
+        typeCharWithGlitch(typed, realChar, () => {
+          setTimeout(type, humanDelay(realChar));
+        });
       } else {
         flashHighlight();
         setTimeout(() => el.classList.remove('typewriter'), 2800);
