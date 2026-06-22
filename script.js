@@ -295,6 +295,21 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
 })(); // IIFE: el código se ejecuta inmediatamente y no contamina el scope global
 
 
+// ===== 6. BACK TO TOP =====
+(function () {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+
+
 // ===== 6. AÑO DINÁMICO EN EL FOOTER =====
 // Actualiza el año automáticamente, así no tienes que cambiarlo cada año.
 // (Opcional: si quieres usarlo, agrega un <span id="year"></span> en el footer)
