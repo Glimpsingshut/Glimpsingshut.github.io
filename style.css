@@ -1453,14 +1453,33 @@ ul { list-style: none; }
   clip-path: inset(0 0% 0 0 round 14px);
 }
 
+/* Logo de empresa */
+.company-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  object-fit: contain;
+  background: #fff;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
 /* Empresa como header cuando agrupa varios roles */
 .timeline-company--header {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: var(--font-size-sm);
   font-weight: 700;
   color: var(--color-accent);
   letter-spacing: 0.03em;
   margin-bottom: 1rem;
+}
+
+.timeline-company {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 /* Bloque individual de un rol dentro de una tarjeta agrupada */
