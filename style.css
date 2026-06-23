@@ -2581,6 +2581,102 @@ body::after {
   50% { border-color: transparent; }
 }
 
+/* ===== MOBILE OPTIMIZATIONS (iOS & Android) ===== */
+
+/* Remove 300ms tap delay on all interactive elements */
+a, button, [role="button"], input, select, textarea, label {
+  touch-action: manipulation;
+}
+
+/* Remove iOS tap highlight flash */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Fix iOS 100vh bug — use dvh when supported */
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* iOS safe area insets (notch / Dynamic Island / home indicator) */
+.navbar {
+  padding-left: max(var(--space-md), env(safe-area-inset-left));
+  padding-right: max(var(--space-md), env(safe-area-inset-right));
+}
+
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Disable heavy animations on mobile to save battery and improve scroll */
+@media (max-width: 768px) {
+  /* Grain texture is expensive on mobile — reduce it */
+  body::after {
+    animation: none;
+    opacity: 0.02;
+  }
+
+  /* Aurora blobs: simpler animation */
+  .aurora-blob {
+    animation-duration: 20s !important;
+    filter: blur(60px) !important;
+  }
+
+  /* Disable cert particle floats on mobile */
+  .cert-badge::after {
+    display: none;
+  }
+
+  /* Ensure tap targets are at least 44px (Apple & Google guidelines) */
+  .nav-links a,
+  .btn,
+  .contact-card,
+  .cert-badge-link,
+  .carousel-btn,
+  .theme-toggle,
+  .nav-toggle {
+    min-height: 44px;
+  }
+
+  /* Fluid cursor canvas hidden on touch devices */
+  #fluid {
+    display: none;
+  }
+
+  /* Reduce box-shadow complexity on mobile */
+  .edu-featured {
+    box-shadow: 0 0 8px rgba(180, 30, 60, 0.1);
+  }
+
+  .cert-badge {
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.07);
+  }
+}
+
+/* Smooth momentum scrolling on iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+  html {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Reduce motion for users who prefer it (accessibility + battery) */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .aurora-blob,
+  body::after,
+  .cert-badge::after,
+  .edu-connector-dot {
+    animation: none !important;
+  }
+}
+
 .typewriter-flash {
   animation: tw-flash 1.8s ease forwards;
 }
