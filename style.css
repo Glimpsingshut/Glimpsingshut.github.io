@@ -1855,6 +1855,13 @@ ul { list-style: none; }
   opacity: 0.85;
 }
 
+.cert-issuer-logo--lg {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  opacity: 0.9;
+}
+
 /* Línea conectora entre tarjetas de educación */
 .edu-connector {
   position: relative;
