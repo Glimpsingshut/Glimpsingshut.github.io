@@ -782,19 +782,24 @@ if (yearEl) {
 (function () {
   const email = 'uarredondov@hotmail.com';
   const toast = document.getElementById('email-toast');
-  const contactBtns = document.querySelectorAll('.nav-links a[href="#contact"]');
-  contactBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      navigator.clipboard.writeText(email).then(() => {
-        if (!toast) return;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2500);
-      }).catch(() => {
-        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-      });
+
+  function copyEmail(e) {
+    e.preventDefault();
+    navigator.clipboard.writeText(email).then(() => {
+      if (!toast) return;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
     });
+  }
+
+  // Navbar Contact link
+  document.querySelectorAll('.nav-links a[href="#contact"]').forEach(btn => {
+    btn.addEventListener('click', copyEmail);
   });
+
+  // Email card in contact section
+  const emailCard = document.getElementById('email-copy-card');
+  if (emailCard) emailCard.addEventListener('click', copyEmail);
 })();
 
 // ===== ANIMATED STATS COUNTER =====
