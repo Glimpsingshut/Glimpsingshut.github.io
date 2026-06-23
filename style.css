@@ -1852,6 +1852,78 @@ ul { list-style: none; }
   opacity: 0.85;
 }
 
+/* Línea conectora entre tarjetas de educación */
+.edu-connector {
+  position: relative;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -1.2rem;
+  margin-bottom: -0.8rem;
+  z-index: 1;
+}
+
+.edu-connector-line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(96,200,255,0.3), rgba(96,200,255,0.1));
+  border-radius: 2px;
+}
+
+.edu-connector-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #60c8ff;
+  box-shadow: 0 0 8px rgba(96,200,255,0.8);
+  top: 0;
+  animation: edu-dot-travel 2.4s ease-in-out infinite;
+}
+
+@keyframes edu-dot-travel {
+  0%   { top: 0;    opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: calc(100% - 7px); opacity: 0; }
+}
+
+/* Partícula flotante en cert-badges */
+.cert-badge::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(96,200,255,0.7);
+  box-shadow: 0 0 6px rgba(96,200,255,0.5);
+  bottom: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: cert-particle 3.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.cert-badge:nth-child(2)::after { animation-delay: 0.9s; }
+.cert-badge:nth-child(3)::after {
+  animation-delay: 1.8s;
+  background: rgba(124,111,255,0.7);
+  box-shadow: 0 0 6px rgba(124,111,255,0.5);
+}
+.cert-badge:nth-child(4)::after {
+  animation-delay: 2.7s;
+  background: rgba(124,111,255,0.7);
+  box-shadow: 0 0 6px rgba(124,111,255,0.5);
+}
+
+@keyframes cert-particle {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(0);     }
+  15%  { opacity: 1; }
+  85%  { opacity: 0.6; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-40px); }
+}
+
 /* Animación escalonada en badge-wall */
 .badge-wall .cert-badge:nth-child(1) { animation-delay: 0ms; }
 .badge-wall .cert-badge:nth-child(2) { animation-delay: 200ms; }

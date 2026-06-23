@@ -639,7 +639,6 @@ if (yearEl) {
     constructor() { this.reset(true); }
     reset(initial = false) {
       const angle = Math.random() * Math.PI * 2;
-      // initial stars spread across screen; new ones spawn near center
       const r = initial ? Math.random() * Math.max(W(), H()) * 0.5 : Math.random() * 12;
       this.x  = W()/2 + Math.cos(angle) * r;
       this.y  = H()/2 + Math.sin(angle) * r;
@@ -647,7 +646,6 @@ if (yearEl) {
       this.speed = 0.4 + Math.random() * 0.8;
       this.size  = Math.random() * 1.2 + 0.3;
       this.brightness = 0.5 + Math.random() * 0.5;
-      // previous position for streak
       this.px = this.x;
       this.py = this.y;
     }
@@ -664,14 +662,10 @@ if (yearEl) {
       const dist = Math.hypot(this.x - cx, this.y - cy);
       const a = Math.min(1, dist / 60) * this.brightness;
       if (a <= 0) return;
-
-      // streak from previous pos to current
       const grad = ctx.createLinearGradient(this.px, this.py, this.x, this.y);
-      // color: white-blue tones
       const blue = Math.round(180 + warp * 75);
       grad.addColorStop(0, `rgba(180,210,${blue},0)`);
       grad.addColorStop(1, `rgba(255,255,255,${a})`);
-
       const lineW = this.size * (1 + warp * 3);
       ctx.save();
       ctx.globalCompositeOperation = 'lighter';
@@ -709,11 +703,6 @@ if (yearEl) {
     ctx.restore();
   }
 
-  // ---- Timing ----
-  // Phase 0 (0–1.8s): slow drift, stars emerging
-  // Phase 1 (1.8–3.2s): warp acceleration
-  // Phase 2 (3.2–3.6s): peak warp + flash
-  // Phase 3: fade overlay → page revealed
   const DRIFT_DUR  = 1800;
   const WARP_DUR   = 1400;
   const FLASH_DUR  = 400;
@@ -721,7 +710,6 @@ if (yearEl) {
 
   let phase = 0, startTime = null, warpStart = null, flashStart = null, doneTime = null;
 
-  // rAF + setTimeout fallback
   let _rafBroken = false, _pendingRaf = null;
   function scheduleNext() {
     let fired = false;
@@ -745,24 +733,17 @@ if (yearEl) {
     let warp = 0;
 
     if (phase === 0) {
-      // slow drift
       warp = 0;
       if (elapsed >= DRIFT_DUR) { phase = 1; warpStart = ts; }
-
     } else if (phase === 1) {
-      // acceleration: warp 0 → 1
       const wp = Math.min((ts - warpStart) / WARP_DUR, 1);
-      warp = wp * wp * wp; // ease-in cubic — starts slow, builds intensity
+      warp = wp * wp * wp;
       if (wp >= 1) { phase = 2; flashStart = ts; }
-
     } else if (phase === 2) {
-      // peak warp + flash
       warp = 1;
       const fp = Math.min((ts - flashStart) / FLASH_DUR, 1);
-      // flash peaks at fp=0.3 then fades
       flashAlpha = fp < 0.3 ? fp / 0.3 : 1 - (fp - 0.3) / 0.7;
       if (fp >= 1) { phase = 3; doneTime = ts; }
-
     } else if (phase === 3) {
       if (ts - doneTime >= FADE_DELAY) {
         overlay.classList.add('fade-out');
@@ -772,7 +753,6 @@ if (yearEl) {
       }
     }
 
-    // Update & draw stars
     for (let i = 0; i < stars.length; i++) {
       stars[i].update(warp);
       stars[i].draw(warp);
@@ -780,7 +760,6 @@ if (yearEl) {
     }
 
     drawFlash(flashAlpha);
-
     scheduleNext();
   }
 
