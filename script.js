@@ -782,7 +782,7 @@ if (yearEl) {
 (function () {
   const email = 'uarredondov@hotmail.com';
   const toast = document.getElementById('email-toast');
-  const contactBtns = document.querySelectorAll('.btn-contact, a[href="#contact"]');
+  const contactBtns = document.querySelectorAll('.nav-links a[href="#contact"]');
   contactBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
@@ -791,7 +791,6 @@ if (yearEl) {
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 2500);
       }).catch(() => {
-        // Fallback: scroll to contact section
         document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
       });
     });
