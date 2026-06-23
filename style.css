@@ -1701,17 +1701,17 @@ ul { list-style: none; }
   align-items: center;
   gap: 1.2rem;
   background: var(--color-surface);
-  border: 1px solid rgba(180, 30, 60, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 14px;
   padding: 1.4rem 1.6rem;
   margin-bottom: 2rem;
-  box-shadow: 0 0 12px rgba(180, 30, 60, 0.15), 0 0 28px rgba(180, 30, 60, 0.07);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.08), 0 0 28px rgba(255, 255, 255, 0.04);
   transition: box-shadow 0.3s, border-color 0.3s;
 }
 
 .edu-featured:hover {
-  border-color: rgba(180, 30, 60, 0.8);
-  box-shadow: 0 0 18px rgba(180, 30, 60, 0.3), 0 0 40px rgba(180, 30, 60, 0.12);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.18), 0 0 40px rgba(255, 255, 255, 0.07);
 }
 
 .edu-featured-icon {
