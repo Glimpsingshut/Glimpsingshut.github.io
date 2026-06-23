@@ -1782,8 +1782,15 @@ ul { list-style: none; }
 }
 
 .cert-badge:hover {
-  border-color: rgba(124,111,255,0.35);
-  transform: translateY(-2px);
+  border-color: rgba(96,200,255,0.4);
+  box-shadow: 0 0 18px rgba(96,200,255,0.12), 0 4px 20px rgba(0,0,0,0.15);
+  transform: translateY(-3px);
+}
+
+.cert-badge:nth-child(3):hover,
+.cert-badge:nth-child(4):hover {
+  border-color: rgba(124,111,255,0.4);
+  box-shadow: 0 0 18px rgba(124,111,255,0.12), 0 4px 20px rgba(0,0,0,0.15);
 }
 
 .cert-badge-year {
@@ -1827,6 +1834,42 @@ ul { list-style: none; }
 .cert-badge-issuer {
   font-size: 0.72rem;
   color: var(--color-text-muted);
+  margin: 0;
+}
+
+.cert-badge-issuer-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.cert-issuer-logo {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+  border-radius: 3px;
+  opacity: 0.85;
+}
+
+/* Animación escalonada en badge-wall */
+.badge-wall .cert-badge:nth-child(1) { animation-delay: 0ms; }
+.badge-wall .cert-badge:nth-child(2) { animation-delay: 100ms; }
+.badge-wall .cert-badge:nth-child(3) { animation-delay: 200ms; }
+.badge-wall .cert-badge:nth-child(4) { animation-delay: 300ms; }
+
+/* Animación escalonada en edu-featured */
+.edu-featured:nth-of-type(1) { animation-delay: 0ms; }
+.edu-featured:nth-of-type(2) { animation-delay: 120ms; }
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.edu-featured.visible,
+.cert-badge.visible {
+  animation: fade-up 0.5s ease both;
 }
 
 .cert-badge-link {
