@@ -27,7 +27,11 @@ SOFTWARE.
 // Simulation section
 
 const canvas = document.getElementById('fluid');
-resizeCanvas();
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', resizeCanvas);
+} else {
+    resizeCanvas();
+}
 
 let config = {
     SIM_RESOLUTION: 128,
@@ -1071,6 +1075,15 @@ multipleSplats(parseInt(Math.random() * 20) + 5);
 let lastUpdateTime = Date.now();
 let colorUpdateTimer = 0.0;
 update();
+
+// Recover from WebGL context loss (common when switching tabs or GPU resets)
+canvas.addEventListener('webglcontextlost', (e) => {
+    e.preventDefault();
+}, false);
+
+canvas.addEventListener('webglcontextrestored', () => {
+    initFramebuffers();
+}, false);
 
 function update () {
     const dt = calcDeltaTime();
