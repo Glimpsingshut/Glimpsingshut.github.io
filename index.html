@@ -74,11 +74,14 @@
   <!-- La barra de navegación fija en la parte superior -->
   <nav class="navbar">
     <a href="#inicio" class="nav-logo" aria-label="Home">
-      <svg viewBox="0 0 40 40" width="42" height="42" aria-hidden="true" class="logo-minimal">
-        <rect x="6" y="8" width="28" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
-        <line x1="10" y1="14" x2="30" y2="14" stroke="currentColor" stroke-width="1" opacity="0.8" />
-        <path d="M 10 21 Q 13 18 16 21 T 22 21 T 28 21" stroke="currentColor" stroke-width="1" fill="none" opacity="0.6" stroke-linecap="round" />
-      </svg>
+      <div class="logo-ring-wrap">
+        <svg viewBox="0 0 50 40" width="64" height="52" aria-hidden="true" class="logo-minimal">
+          <rect x="6" y="8" width="28" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <line x1="10" y1="14" x2="30" y2="14" stroke="currentColor" stroke-width="1" opacity="0.8" />
+          <!-- Bottom: animated wavy signal -->
+          <path class="logo-pulse-line" d="M 10 21 Q 13 18 16 21 T 22 21 T 28 21 T 30 21" stroke="currentColor" stroke-width="1" fill="none" stroke-linecap="round" />
+        </svg>
+      </div>
     </a>
     <ul class="nav-links">
       <div class="nav-pill" aria-hidden="true"></div>
@@ -202,7 +205,7 @@
           <div class="techstack">
             <p class="techstack-title">Tech Stack</p>
 
-            <div class="techstack-category">
+            <div class="techstack-category techstack-category--cloud">
               <span class="techstack-cat-label">Cloud &amp; Platforms</span>
               <div class="techstack-grid">
                 <span class="tech-pill">
@@ -228,7 +231,7 @@
               </div>
             </div>
 
-            <div class="techstack-category">
+            <div class="techstack-category techstack-category--lang">
               <span class="techstack-cat-label">Languages</span>
               <div class="techstack-grid">
                 <span class="tech-pill">
@@ -262,7 +265,7 @@
               </div>
             </div>
 
-            <div class="techstack-category">
+            <div class="techstack-category techstack-category--tools">
               <span class="techstack-cat-label">Tools &amp; DevOps</span>
               <div class="techstack-grid">
                 <span class="tech-pill">

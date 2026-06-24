@@ -152,10 +152,23 @@ const navbar = document.querySelector('.navbar');
 
 const scrollIndicator = document.querySelector('.scroll-indicator');
 
+const logoSvg = document.querySelector('.logo-minimal');
+let wasScrolled = false;
+
 window.addEventListener('scroll', () => {
   const y = window.scrollY;
+  const isScrolled = y > 50;
 
-  navbar?.classList.toggle('scrolled', y > 50);
+  navbar?.classList.toggle('scrolled', isScrolled);
+
+  // Flash logo when navbar first becomes opaque
+  if (isScrolled && !wasScrolled && logoSvg) {
+    logoSvg.classList.remove('logo-flash');
+    void logoSvg.offsetWidth; // reflow to restart animation
+    logoSvg.classList.add('logo-flash');
+    setTimeout(() => logoSvg.classList.remove('logo-flash'), 500);
+  }
+  wasScrolled = isScrolled;
 
   // Scroll indicator desaparece suavemente al empezar a bajar
   if (scrollIndicator) {

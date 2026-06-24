@@ -1,3 +1,8 @@
+::selection {
+  background: rgba(96, 200, 255, 0.35);
+  color: #fff;
+}
+
 /* ===== CSS CUSTOM PROPERTIES FOR ANIMATIONS ===== */
 @property --border-angle {
   syntax: '<angle>';
@@ -497,6 +502,79 @@ ul { list-style: none; }
   line-height: 1;
 }
 
+/* ── Nav logo animations ── */
+@keyframes logo-hue-rotate {
+  0%   { filter: drop-shadow(0 0 7px rgba(96,200,255,0.6)); }
+  33%  { filter: drop-shadow(0 0 7px rgba(45,212,191,0.6)); }
+  66%  { filter: drop-shadow(0 0 7px rgba(124,111,255,0.6)); }
+  100% { filter: drop-shadow(0 0 7px rgba(96,200,255,0.6)); }
+}
+
+@keyframes logo-ring-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes logo-screen-flash {
+  0%, 100% { opacity: 1; }
+  40%       { opacity: 0.25; }
+  70%       { opacity: 0.9; }
+}
+
+
+
+.logo-ring-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.logo-minimal {
+  animation: logo-hue-rotate 4s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.16,1,0.3,1);
+}
+
+/* Wavy signal line */
+@keyframes logo-wave-sweep {
+  0%   { stroke-dashoffset: 60; opacity: 0.2; }
+  20%  { opacity: 0.9; }
+  80%  { opacity: 0.9; }
+  100% { stroke-dashoffset: -60; opacity: 0.2; }
+}
+.logo-pulse-line {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: logo-wave-sweep 4.5s ease-in-out infinite;
+}
+
+
+
+/* UA initials */
+.logo-initials {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--color-accent);
+  opacity: 0.85;
+  margin-left: 0.4rem;
+  line-height: 1;
+}
+
+/* Hover: screen flash + scale */
+.nav-logo:hover .logo-minimal {
+  transform: scale(1.1);
+}
+.nav-logo:hover .logo-minimal rect {
+  animation: logo-screen-flash 0.5s ease-in-out 1;
+}
+
+/* Scroll flash — triggered via JS adding .logo-flash */
+.logo-minimal.logo-flash rect {
+  animation: logo-screen-flash 0.5s ease-in-out 1;
+}
+
 .nav-links {
   display: flex;
   gap: 4px;
@@ -961,6 +1039,9 @@ ul { list-style: none; }
   overflow: hidden;             /* Oculta los slides que están fuera del área visible */
   border-radius: var(--radius-lg);
   user-select: none;            /* Evita que se seleccione texto al arrastrar */
+  outline: 1px solid rgba(0,0,0,0.7);
+  box-shadow: 0 0 18px rgba(0,0,0,0.9), 0 0 40px rgba(0,0,0,0.5), 0 0 80px rgba(0,0,0,0.25);
+  padding-bottom: 60px;
 }
 
 /* La "pista": contiene todos los slides en fila horizontal */
@@ -1805,6 +1886,15 @@ ul { list-style: none; }
   border-color: rgba(255, 255, 255, 0.65);
   box-shadow: 0 0 18px rgba(255, 255, 255, 0.16), 0 0 40px rgba(255, 255, 255, 0.06), 0 4px 20px rgba(0,0,0,0.15);
   transform: translateY(-3px);
+}
+
+[data-theme="light"] .cert-badge {
+  border-color: rgba(30,64,175,0.45);
+  box-shadow: 0 0 14px rgba(30,64,175,0.2), 0 0 30px rgba(30,64,175,0.08);
+}
+[data-theme="light"] .cert-badge:hover {
+  border-color: rgba(30,64,175,0.75);
+  box-shadow: 0 0 18px rgba(30,64,175,0.3), 0 0 40px rgba(30,64,175,0.12), 0 4px 20px rgba(0,0,0,0.08);
 }
 
 
@@ -2903,9 +2993,39 @@ body {
   background: rgba(0,0,0,0.03);
   border: 1px solid rgba(0,0,0,0.1);
 }
-.tech-pill:hover {
-  border-color: rgba(124,111,255,0.5);
+/* Cloud & Platforms — azul */
+.techstack-category--cloud .tech-pill {
+  border-color: rgba(96,200,255,0.45);
+  box-shadow: 0 0 8px rgba(96,200,255,0.2), inset 0 0 6px rgba(96,200,255,0.04);
+}
+.techstack-category--cloud .tech-pill:hover {
+  border-color: rgba(96,200,255,0.65);
+  background: rgba(96,200,255,0.08);
+  box-shadow: 0 0 10px rgba(96,200,255,0.15);
+  color: var(--color-text);
+}
+
+/* Languages — teal */
+.techstack-category--lang .tech-pill {
+  border-color: rgba(45,212,191,0.45);
+  box-shadow: 0 0 8px rgba(45,212,191,0.2), inset 0 0 6px rgba(45,212,191,0.04);
+}
+.techstack-category--lang .tech-pill:hover {
+  border-color: rgba(45,212,191,0.65);
+  background: rgba(45,212,191,0.08);
+  box-shadow: 0 0 10px rgba(45,212,191,0.15);
+  color: var(--color-text);
+}
+
+/* Tools & DevOps — morado */
+.techstack-category--tools .tech-pill {
+  border-color: rgba(124,111,255,0.45);
+  box-shadow: 0 0 8px rgba(124,111,255,0.2), inset 0 0 6px rgba(124,111,255,0.04);
+}
+.techstack-category--tools .tech-pill:hover {
+  border-color: rgba(124,111,255,0.65);
   background: rgba(124,111,255,0.08);
+  box-shadow: 0 0 10px rgba(124,111,255,0.15);
   color: var(--color-text);
 }
 .tech-pill svg {
