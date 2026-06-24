@@ -542,7 +542,7 @@ if (yearEl) {
 })();
 
 
-// ===== 8. CUSTOM CURSOR — TRAIL =====
+// ===== 8. CUSTOM CURSOR — CHROMATIC DOT + RING =====
 (function () {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
@@ -554,13 +554,9 @@ if (yearEl) {
   resize();
   window.addEventListener('resize', resize);
 
-  const TRAIL   = 10;
-  const BASE_R  = 5;       // radius of head dot
-  const COLOR   = [226, 105, 74]; // accent orange
-
-  const positions = Array.from({ length: TRAIL }, () => ({ x: -100, y: -100 }));
-  let mouse = { x: -100, y: -100 };
-  let isHovering = false; // over a clickable element
+  let mouse  = { x: -200, y: -200 };
+  let isHovering = false;
+  let tick = 0;
 
   document.addEventListener('mousemove', e => {
     mouse.x = e.clientX;
@@ -587,28 +583,20 @@ if (yearEl) {
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Lerp chain
-    positions[0].x += (mouse.x - positions[0].x) * 0.28;
-    positions[0].y += (mouse.y - positions[0].y) * 0.28;
-    for (let i = 1; i < TRAIL; i++) {
-      positions[i].x += (positions[i - 1].x - positions[i].x) * 0.38;
-      positions[i].y += (positions[i - 1].y - positions[i].y) * 0.38;
-    }
+    tick += 0.5;
+    // Cycle through fluid colors: blue(200°) → teal(160°) → purple(280°) → back
+    const mappedHue = 220 + Math.sin(tick * Math.PI / 180) * 80;
 
-    // Draw dots from tail to head (smallest/most transparent first)
-    for (let i = TRAIL - 1; i >= 0; i--) {
-      const t      = 1 - i / TRAIL;           // 0 = tail, 1 = head
-      const r      = BASE_R * (isHovering ? 1.5 : 1) * (0.25 + t * 0.75);
-      const alpha  = t * (isHovering ? 0.9 : 0.75);
-      const [R, G, B] = COLOR;
+    const colorGlow = `hsla(${mappedHue}, 90%, 65%, 0.4)`;
+    const colorFill = `hsla(${mappedHue}, 90%, 78%, 0.95)`;
 
-      ctx.beginPath();
-      ctx.arc(positions[i].x, positions[i].y, r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${R},${G},${B},${alpha.toFixed(2)})`;
-      ctx.shadowColor = `rgba(${R},${G},${B},${(alpha * 0.6).toFixed(2)})`;
-      ctx.shadowBlur = i === 0 ? 10 : 4;
-      ctx.fill();
-    }
+    // Dot — snaps directly to mouse
+    ctx.beginPath();
+    ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
+    ctx.fillStyle   = colorFill;
+    ctx.shadowColor = colorGlow;
+    ctx.shadowBlur  = 10;
+    ctx.fill();
 
     ctx.shadowBlur = 0;
     requestAnimationFrame(draw);
