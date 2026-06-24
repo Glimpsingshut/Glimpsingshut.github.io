@@ -198,7 +198,7 @@ document.querySelectorAll('.project-card').forEach((card, index) => {
 (function () {
   if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
 
-  document.querySelectorAll('.project-card:not(.project-card--featured)').forEach(card => {
+  document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width  - 0.5;
@@ -498,54 +498,6 @@ if (yearEl) {
   })();
 })();
 
-
-// ===== LIGHTBOX =====
-(function () {
-  const overlay = document.getElementById('lightbox');
-  const img     = document.getElementById('lightbox-img');
-  if (!overlay || !img) return;
-
-  function open(src, alt) {
-    img.src = src;
-    img.alt = alt || '';
-    overlay.classList.add('active');
-    document.body.style.overflow = 'hidden';
-  }
-  function close() {
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-  }
-
-  overlay.querySelector('.lightbox-close').addEventListener('click', close);
-  overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
-
-  document.querySelectorAll('.mini-carousel-track img').forEach(i => {
-    i.addEventListener('click', () => open(i.src, i.alt));
-  });
-})();
-
-// ===== MINI CAROUSELS (project cards) =====
-document.querySelectorAll('.project-image--mini-carousel').forEach(container => {
-  const track = container.querySelector('.mini-carousel-track');
-  const dots  = container.querySelectorAll('.mini-carousel-dot');
-  const total = track.querySelectorAll('img').length;
-  let current = 0;
-
-  function goTo(idx) {
-    current = (idx + total) % total;
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  container.querySelector('.mini-carousel-btn--prev').addEventListener('click', () => goTo(current - 1));
-  container.querySelector('.mini-carousel-btn--next').addEventListener('click', () => goTo(current + 1));
-
-  // Auto-advance every 4s
-  let timer = setInterval(() => goTo(current + 1), 4000);
-  container.addEventListener('mouseenter', () => clearInterval(timer));
-  container.addEventListener('mouseleave', () => { timer = setInterval(() => goTo(current + 1), 4000); });
-});
 
 // ===== 8. NEON WAVES =====
 (function () {
