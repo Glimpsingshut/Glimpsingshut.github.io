@@ -547,17 +547,8 @@
 
         <!-- Proyecto 2 — featured placeholder -->
         <article class="project-card project-card--technical project-card--featured reveal" style="--reveal-delay:100ms">
-          <div class="project-image project-image--mini-carousel">
-            <div class="mini-carousel-track">
-              <img src="images/Projects/48hrs_1.jpeg" alt="48-hour resolution project — recognition" loading="lazy" />
-              <img src="images/Projects/48hrs_2.jpeg" alt="48-hour resolution project — metrics" loading="lazy" />
-            </div>
-            <button class="mini-carousel-btn mini-carousel-btn--prev" aria-label="Previous image">&#8249;</button>
-            <button class="mini-carousel-btn mini-carousel-btn--next" aria-label="Next image">&#8250;</button>
-            <div class="mini-carousel-dots">
-              <span class="mini-carousel-dot active"></span>
-              <span class="mini-carousel-dot"></span>
-            </div>
+          <div class="project-image project-image--contain">
+            <img src="images/Projects/48hrs_1.jpeg" alt="48-hour resolution project" loading="lazy" onerror="this.parentElement.classList.add('placeholder')" />
           </div>
           <div class="project-info">
             <span class="project-tag">Operations · Process Improvement</span>
