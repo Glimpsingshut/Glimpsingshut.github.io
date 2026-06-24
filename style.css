@@ -929,18 +929,40 @@ ul { list-style: none; }
   gap: var(--space-md);
 }
 
+/* Featured card spans full width */
+.project-card--featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+}
+
 .project-card {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   overflow: hidden;
   border: 1px solid var(--color-border);
-  transition: box-shadow var(--transition), transform 0.1s ease;
+  transition: box-shadow 0.3s ease, transform 0.15s ease, border-color 0.3s ease;
   will-change: transform;
   transform-style: preserve-3d;
+  animation-delay: var(--reveal-delay, 0ms);
 }
 
-.project-card:hover {
-  box-shadow: 0 24px 48px rgba(0,0,0,0.14);
+/* Neon border per category */
+.project-card--technical {
+  border-color: rgba(96,200,255,0.3);
+  box-shadow: 0 0 12px rgba(96,200,255,0.07);
+}
+.project-card--technical:hover {
+  border-color: rgba(96,200,255,0.65);
+  box-shadow: 0 0 20px rgba(96,200,255,0.18), 0 24px 48px rgba(0,0,0,0.14);
+}
+.project-card--leadership {
+  border-color: rgba(124,111,255,0.3);
+  box-shadow: 0 0 12px rgba(124,111,255,0.07);
+}
+.project-card--leadership:hover {
+  border-color: rgba(124,111,255,0.65);
+  box-shadow: 0 0 20px rgba(124,111,255,0.18), 0 24px 48px rgba(0,0,0,0.14);
 }
 
 /* Imagen del proyecto */
@@ -948,6 +970,21 @@ ul { list-style: none; }
   aspect-ratio: 16 / 9;
   background: var(--color-border);
   overflow: hidden;
+  position: relative;
+}
+
+/* Shimmer on hover */
+.project-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.12) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+  pointer-events: none;
+}
+.project-card:hover .project-image::after {
+  transform: translateX(100%);
 }
 
 .project-image.placeholder {
@@ -960,15 +997,54 @@ ul { list-style: none; }
 
 .project-image.placeholder::after {
   content: 'Imagen del proyecto';
+  background: none;
+  transform: none;
+  position: static;
+  inset: unset;
 }
 
 .project-image img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.4s ease;
 }
 
+.project-image--contain {
+  background: #eef2f7;
+  padding: 12px;
+  position: relative;
+}
+.project-image--contain img {
+  object-fit: contain;
+  border-radius: 6px;
+  position: relative;
+  z-index: 0;
+}
+.project-image--contain::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(60,120,220,0.35) 0%, transparent 25%),
+    linear-gradient(to top,    rgba(60,120,220,0.35) 0%, transparent 25%);
+  pointer-events: none;
+  z-index: 1;
+}
+/* disable shimmer on contain images */
+.project-image--contain::after {
+  display: none;
+}
+
 .project-card:hover .project-image img {
-  transform: scale(1.04); /* Zoom sutil en la imagen al hacer hover */
+  transform: scale(1.04);
+}
+
+/* Featured card: image fills left column, no aspect-ratio override needed */
+.project-card--featured .project-image {
+  aspect-ratio: unset;
+  height: 100%;
+  min-height: 260px;
 }
 
 /* Info dentro de la tarjeta */
@@ -2263,6 +2339,15 @@ ul { list-style: none; }
   }
 
   .project-card { border-radius: 12px; }
+  .project-card--featured {
+    grid-column: auto;
+    grid-template-columns: 1fr;
+  }
+  .project-card--featured .project-image {
+    min-height: 200px;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 
   /* ── Hobbies / Carousel ── */
   .carousel-slide {
