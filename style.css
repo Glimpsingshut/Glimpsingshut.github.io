@@ -952,7 +952,7 @@ ul { list-style: none; }
   border-color: rgba(96,200,255,0.3);
   box-shadow: 0 0 12px rgba(96,200,255,0.07);
 }
-.project-card--technical:hover {
+.project-card--technical:not(.project-card--featured):hover {
   border-color: rgba(96,200,255,0.65);
   box-shadow: 0 0 20px rgba(96,200,255,0.18), 0 24px 48px rgba(0,0,0,0.14);
 }
@@ -960,7 +960,7 @@ ul { list-style: none; }
   border-color: rgba(124,111,255,0.3);
   box-shadow: 0 0 12px rgba(124,111,255,0.07);
 }
-.project-card--leadership:hover {
+.project-card--leadership:not(.project-card--featured):hover {
   border-color: rgba(124,111,255,0.65);
   box-shadow: 0 0 20px rgba(124,111,255,0.18), 0 24px 48px rgba(0,0,0,0.14);
 }
@@ -1044,8 +1044,116 @@ ul { list-style: none; }
 .project-card--featured .project-image {
   aspect-ratio: unset;
   height: 100%;
-  min-height: 260px;
+  min-height: 340px;
 }
+
+/* Mini-carousel inside project card */
+.project-image--mini-carousel {
+  position: relative;
+  overflow: hidden;
+  background: #0d1117;
+}
+.mini-carousel-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+}
+.mini-carousel-track img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.mini-carousel-btn {
+  position: absolute;
+  bottom: 10px;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(96,200,255,0.3);
+  color: rgba(96,200,255,0.9);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.mini-carousel-btn:hover {
+  background: rgba(96,200,255,0.15);
+  border-color: rgba(96,200,255,0.7);
+  box-shadow: 0 0 10px rgba(96,200,255,0.3);
+}
+.mini-carousel-btn--prev { left: 10px; }
+.mini-carousel-btn--next { right: 10px; }
+.mini-carousel-dots {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 6px;
+  z-index: 2;
+}
+.mini-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transition: background 0.25s, transform 0.25s;
+}
+.mini-carousel-dot.active {
+  background: rgba(96,200,255,0.9);
+  transform: scale(1.3);
+}
+
+/* Lightbox */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.88);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.lightbox-overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.lightbox-overlay img {
+  max-width: 90vw;
+  max-height: 88vh;
+  border-radius: 10px;
+  box-shadow: 0 0 60px rgba(96,200,255,0.2), 0 30px 80px rgba(0,0,0,0.6);
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+.lightbox-close:hover { color: #fff; }
+.mini-carousel-track img { cursor: zoom-in; }
 
 /* Info dentro de la tarjeta */
 .project-info {
