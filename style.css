@@ -504,10 +504,10 @@ ul { list-style: none; }
 
 /* ── Nav logo animations ── */
 @keyframes logo-hue-rotate {
-  0%   { filter: drop-shadow(0 0 7px rgba(96,200,255,0.6)); }
-  33%  { filter: drop-shadow(0 0 7px rgba(45,212,191,0.6)); }
-  66%  { filter: drop-shadow(0 0 7px rgba(124,111,255,0.6)); }
-  100% { filter: drop-shadow(0 0 7px rgba(96,200,255,0.6)); }
+  0%   { -webkit-filter: drop-shadow(0 0 7px rgba(96,200,255,0.6));  filter: drop-shadow(0 0 7px rgba(96,200,255,0.6)); }
+  33%  { -webkit-filter: drop-shadow(0 0 7px rgba(45,212,191,0.6));  filter: drop-shadow(0 0 7px rgba(45,212,191,0.6)); }
+  66%  { -webkit-filter: drop-shadow(0 0 7px rgba(124,111,255,0.6)); filter: drop-shadow(0 0 7px rgba(124,111,255,0.6)); }
+  100% { -webkit-filter: drop-shadow(0 0 7px rgba(96,200,255,0.6));  filter: drop-shadow(0 0 7px rgba(96,200,255,0.6)); }
 }
 
 @keyframes logo-ring-spin {
@@ -546,7 +546,7 @@ ul { list-style: none; }
 .logo-pulse-line {
   stroke-dasharray: 60;
   stroke-dashoffset: 60;
-  animation: logo-wave-sweep 4.5s ease-in-out infinite;
+  animation: logo-wave-sweep 8s ease-in-out infinite;
 }
 
 
@@ -2752,6 +2752,35 @@ body {
   .cert-badge {
     box-shadow: 0 0 8px rgba(255, 255, 255, 0.07);
   }
+
+  /* Navbar icon: smaller on mobile */
+  .logo-minimal {
+    width: 44px;
+    height: 36px;
+  }
+
+  /* Disable heavy SVG animations on mobile */
+  .logo-pulse-line {
+    animation: none;
+    opacity: 0.7;
+  }
+  .logo-minimal {
+    animation: none;
+    -webkit-filter: drop-shadow(0 0 5px rgba(96,200,255,0.4));
+    filter: drop-shadow(0 0 5px rgba(96,200,255,0.4));
+  }
+
+  /* Simplify tech pill neon on mobile */
+  .techstack-category--cloud .tech-pill,
+  .techstack-category--lang .tech-pill,
+  .techstack-category--tools .tech-pill {
+    box-shadow: none;
+  }
+
+  /* Simplify carousel neon border on mobile */
+  .carousel {
+    box-shadow: 0 0 10px rgba(0,0,0,0.6);
+  }
 }
 
 /* Smooth momentum scrolling on iOS */
@@ -2772,7 +2801,9 @@ body {
   .aurora-blob,
   body::after,
   .cert-badge::after,
-  .edu-connector-dot {
+  .edu-connector-dot,
+  .logo-minimal,
+  .logo-pulse-line {
     animation: none !important;
   }
 }
