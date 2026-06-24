@@ -432,8 +432,8 @@ if (yearEl) {
       lbImg.alt = gallery[index].alt;
       lbImg.classList.remove('switching');
     }, 180);
-    lbPrev.classList.toggle('hidden', gallery.length <= 1);
-    lbNext.classList.toggle('hidden', gallery.length <= 1);
+    if (lbPrev) lbPrev.classList.toggle('hidden', gallery.length <= 1);
+    if (lbNext) lbNext.classList.toggle('hidden', gallery.length <= 1);
   }
 
   // Click on active slide-img opens lightbox with all imgs in that viewer
@@ -445,10 +445,16 @@ if (yearEl) {
     });
   });
 
+  // Click on project card images opens lightbox
+  document.querySelectorAll('.project-image img').forEach(img => {
+    img.style.cursor = 'zoom-in';
+    img.addEventListener('click', () => open([img], 0));
+  });
+
   lbClose.addEventListener('click', close);
   backdrop.addEventListener('click', close);
-  lbPrev.addEventListener('click', () => show(index - 1));
-  lbNext.addEventListener('click', () => show(index + 1));
+  lbPrev?.addEventListener('click', () => show(index - 1));
+  lbNext?.addEventListener('click', () => show(index + 1));
 
   document.addEventListener('keydown', e => {
     if (!lightbox.classList.contains('open')) return;
