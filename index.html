@@ -510,52 +510,67 @@
   <div class="section-divider" aria-hidden="true"></div>
 
   <!-- ===== PROYECTOS ===== -->
-  <section id="proyectos" class="projects-cinematic">
+  <section id="proyectos" class="projects-tabs section" data-active="0">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Work</span>
+        <h2>Projects</h2>
+      </div>
 
-    <div class="scene-label-header">
-      <span class="section-label">Work</span>
-      <h2>Projects</h2>
-    </div>
+      <!-- Tab buttons -->
+      <div class="ptab-nav" role="tablist">
+        <button class="ptab-btn active" role="tab" aria-selected="true"  data-tab="0">#01 &nbsp; Onboarding &amp; Mentorship</button>
+        <button class="ptab-btn"        role="tab" aria-selected="false" data-tab="1">#02 &nbsp; Resolution Time</button>
+        <button class="ptab-btn"        role="tab" aria-selected="false" data-tab="2">#03 &nbsp; ESIM Satellite</button>
+      </div>
 
-    <!-- Scene 01 -->
-    <div class="project-scene" data-index="0">
-      <div class="scene-bg" style="background-image: url('images/Projects/Taquitos.png')"></div>
-      <div class="scene-overlay scene-overlay--purple"></div>
-      <div class="scene-content">
-        <span class="scene-num" aria-hidden="true">#01</span>
-        <span class="scene-tag">Leadership · Talent Development</span>
-        <h3 class="scene-title">Onboarding &amp; Mentorship Program for New Hires</h3>
-        <p class="scene-desc">Led the training and onboarding process for new team members in Sydney and Mexico, ensuring their successful integration and enabling high-quality customer support. My contributions helped accelerate learning curves, enhance support quality, and promote best practices across the team.</p>
-        <p class="scene-award">🏆 Recognized with a <strong>Qualtrics LATAM Taquitos Award</strong> for impact on talent development and overall team success.</p>
+      <!-- Animated background panel -->
+      <div class="ptab-stage">
+        <div class="ptab-bg" aria-hidden="true"></div>
+
+        <!-- Panel 01 -->
+        <div class="ptab-panel active" data-panel="0" role="tabpanel">
+          <div class="ptab-image">
+            <img src="images/Projects/Taquitos.png" alt="Qualtrics LATAM Taquitos Award" loading="lazy" />
+          </div>
+          <div class="ptab-info">
+            <span class="ptab-tag">Leadership · Talent Development</span>
+            <h3>Onboarding &amp; Mentorship Program for New Hires</h3>
+            <p>Led the training and onboarding process for new team members in Sydney and Mexico, ensuring their successful integration and enabling high-quality customer support. Accelerated learning curves, enhanced support quality, and promoted best practices across the team.</p>
+            <p class="ptab-award">🏆 Recognized with a <strong>Qualtrics LATAM Taquitos Award</strong> for impact on talent development and overall team success.</p>
+          </div>
+        </div>
+
+        <!-- Panel 02 -->
+        <div class="ptab-panel" data-panel="1" role="tabpanel">
+          <div class="ptab-image">
+            <img src="images/Projects/48hrs_1.jpeg" alt="48-hour resolution project" loading="lazy" />
+          </div>
+          <div class="ptab-info">
+            <span class="ptab-tag">Operations · Process Improvement</span>
+            <h3>Cross-Regional Resolution Time Reduction</h3>
+            <p>Led a cross-regional initiative across Mexico, Sydney, and Japan that streamlined escalation workflows and standardized response protocols for the APJ region.</p>
+            <p>Drove an <strong>18% increase in resolution rates</strong> and brought average resolution times <strong>under 48 hours</strong> — directly improving customer satisfaction scores.</p>
+            <p class="ptab-award">🏆 Formally recognized by the <strong>Customer Operations department</strong> for establishing this cross-functional framework.</p>
+          </div>
+        </div>
+
+        <!-- Panel 03 -->
+        <div class="ptab-panel" data-panel="2" role="tabpanel">
+          <div class="ptab-image">
+            <img src="images/Projects/CDA.jpeg" alt="ESIM optical satellite communications" loading="lazy" />
+          </div>
+          <div class="ptab-info">
+            <span class="ptab-tag">Research · Telecommunications · IoT</span>
+            <h3>Earth Station In Motion (ESIM) for Optical Satellite Communications</h3>
+            <p>Led end-to-end the design, development, and simulation of an ESIM system for optical satellite communications based on IoT technologies, with focus on the logic layer architecture.</p>
+            <p>Participated in research on emerging communications technologies, contributing to next-generation satellite connectivity solutions.</p>
+            <p class="ptab-award">🏆 Awarded the <strong>Presea "Ing. Sergio Viñals"</strong> — <a href="https://www.icasst.mx" target="_blank" rel="noopener noreferrer" class="ptab-link">International Conference on AeroSpace Science and Technology (ICASST)</a>, 2023.</p>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- Scene 02 -->
-    <div class="project-scene" data-index="1">
-      <div class="scene-bg" style="background-image: url('images/Projects/48hrs_1.jpeg')"></div>
-      <div class="scene-overlay scene-overlay--blue"></div>
-      <div class="scene-content">
-        <span class="scene-num" aria-hidden="true">#02</span>
-        <span class="scene-tag">Operations · Process Improvement</span>
-        <h3 class="scene-title">Cross-Regional Resolution Time Reduction</h3>
-        <p class="scene-desc">Led a cross-regional initiative across Mexico, Sydney, and Japan that streamlined escalation workflows and standardized response protocols for the APJ region. Drove an <strong>18% increase in resolution rates</strong> and brought average times <strong>under 48 hours</strong>.</p>
-        <p class="scene-award">🏆 Formally recognized by the <strong>Customer Operations department</strong> for establishing this cross-functional framework.</p>
-      </div>
-    </div>
-
-    <!-- Scene 03 -->
-    <div class="project-scene" data-index="2">
-      <div class="scene-bg" style="background-image: url('images/Projects/CDA.jpeg')"></div>
-      <div class="scene-overlay scene-overlay--teal"></div>
-      <div class="scene-content">
-        <span class="scene-num" aria-hidden="true">#03</span>
-        <span class="scene-tag">Research · Telecommunications · IoT</span>
-        <h3 class="scene-title">Earth Station In Motion (ESIM) for Optical Satellite Communications</h3>
-        <p class="scene-desc">Led end-to-end the design, development, and simulation of an ESIM system for optical satellite communications based on IoT technologies, with focus on the logic layer architecture. Contributed to research on emerging communications technologies worldwide.</p>
-        <p class="scene-award">🏆 Awarded the <strong>Presea "Ing. Sergio Viñals"</strong> — <a href="https://www.icasst.mx" target="_blank" rel="noopener noreferrer" class="scene-link">ICASST</a>, 2023.</p>
-      </div>
-    </div>
-
   </section>
 
   <div class="section-divider" aria-hidden="true"></div>

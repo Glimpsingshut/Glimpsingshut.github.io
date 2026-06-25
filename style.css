@@ -1038,6 +1038,164 @@ ul { list-style: none; }
   text-shadow: 0 0 8px rgba(96,200,255,0.6);
 }
 
+/* ===== PROYECTOS — TABS ===== */
+
+.projects-tabs {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tab nav */
+.ptab-nav {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.ptab-btn {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: rgba(255,255,255,0.45);
+  padding: 0.55rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  white-space: nowrap;
+}
+.ptab-btn:hover {
+  color: rgba(255,255,255,0.8);
+  border-color: rgba(255,255,255,0.3);
+}
+.ptab-btn.active {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.35);
+  color: #fff;
+}
+
+/* Stage with animated background */
+.ptab-stage {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.ptab-bg {
+  position: absolute;
+  inset: 0;
+  transition: background 0.7s cubic-bezier(0.4,0,0.2,1);
+  background: radial-gradient(ellipse at 20% 60%, rgba(124,111,255,0.35) 0%, transparent 65%),
+              radial-gradient(ellipse at 80% 30%, rgba(96,200,255,0.15) 0%, transparent 55%),
+              var(--color-surface);
+}
+.ptab-stage[data-bg="0"] .ptab-bg,
+.projects-tabs[data-active="0"] .ptab-bg {
+  background: radial-gradient(ellipse at 20% 60%, rgba(124,111,255,0.35) 0%, transparent 65%),
+              radial-gradient(ellipse at 80% 30%, rgba(96,200,255,0.15) 0%, transparent 55%),
+              var(--color-surface);
+}
+.projects-tabs[data-active="1"] .ptab-bg {
+  background: radial-gradient(ellipse at 15% 70%, rgba(96,200,255,0.35) 0%, transparent 65%),
+              radial-gradient(ellipse at 85% 25%, rgba(45,212,191,0.15) 0%, transparent 55%),
+              var(--color-surface);
+}
+.projects-tabs[data-active="2"] .ptab-bg {
+  background: radial-gradient(ellipse at 25% 55%, rgba(45,212,191,0.35) 0%, transparent 65%),
+              radial-gradient(ellipse at 75% 35%, rgba(96,200,255,0.12) 0%, transparent 55%),
+              var(--color-surface);
+}
+
+/* Panels */
+.ptab-panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 2rem;
+  padding: 2rem 2rem 2rem 2rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(18px);
+  transition: opacity 0.45s ease, transform 0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.ptab-panel.active {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(0);
+  position: relative;
+}
+
+.ptab-image {
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 260px;
+}
+.ptab-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 1rem;
+}
+
+.ptab-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.75rem;
+}
+.ptab-tag {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.ptab-info h3 {
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.ptab-info p {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.7;
+}
+.ptab-info p strong { color: rgba(255,255,255,0.95); }
+.ptab-award {
+  font-size: 0.8rem !important;
+  color: rgba(255,255,255,0.45) !important;
+}
+.ptab-award strong { color: rgba(255,255,255,0.75) !important; }
+.ptab-link {
+  color: rgba(96,200,255,0.9);
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+.ptab-link:hover {
+  color: rgba(96,200,255,1);
+  text-shadow: 0 0 8px rgba(96,200,255,0.6);
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .ptab-panel, .ptab-panel.active {
+    grid-template-columns: 1fr;
+    position: relative;
+    padding: 1.25rem;
+  }
+  .ptab-image { min-height: 180px; }
+  .ptab-btn { font-size: 0.72rem; padding: 0.45rem 0.9rem; }
+}
+
 
 /* ===== HOBBIES / CARRUSEL ===== */
 .hobbies {
