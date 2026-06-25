@@ -364,6 +364,31 @@ if (yearEl) {
 }
 
 
+// ===== CINEMATIC PROJECT SCENES =====
+(function () {
+  const scenes = document.querySelectorAll('.project-scene');
+  if (!scenes.length) return;
+
+  // Reveal text on scroll
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => e.target.classList.toggle('scene-in', e.isIntersecting));
+  }, { threshold: 0.25 });
+  scenes.forEach(s => observer.observe(s));
+
+  // Parallax on scroll
+  function onScroll() {
+    scenes.forEach(scene => {
+      const bg = scene.querySelector('.scene-bg');
+      if (!bg) return;
+      const rect = scene.getBoundingClientRect();
+      const progress = -rect.top / (window.innerHeight + rect.height);
+      bg.style.transform = `translateY(${progress * 18}%)`;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+
 // ===== 7. SLIDE VIEWER (B + C) & LIGHTBOX =====
 (function () {
 
