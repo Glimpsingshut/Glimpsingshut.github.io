@@ -1143,6 +1143,13 @@ ul { list-style: none; }
   object-fit: cover;
   border-radius: 0;
 }
+.ptab-image--contain {
+  background: #eef2f7;
+  padding: 1rem;
+}
+.ptab-image--contain img {
+  object-fit: contain;
+}
 
 .ptab-info {
   display: flex;
