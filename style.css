@@ -1142,6 +1142,7 @@ ul { list-style: none; }
   height: 100%;
   object-fit: contain;
   padding: 1rem;
+  border-radius: 12px;
 }
 
 .ptab-info {
