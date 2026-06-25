@@ -465,8 +465,8 @@ if (yearEl) {
     });
   });
 
-  // Click on project card images opens lightbox
-  document.querySelectorAll('.project-image img').forEach(img => {
+  // Click on project images opens lightbox
+  document.querySelectorAll('.project-image img, .ptab-image img').forEach(img => {
     img.style.cursor = 'zoom-in';
     img.addEventListener('click', () => open([img], 0));
   });
