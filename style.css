@@ -1129,7 +1129,7 @@ ul { list-style: none; }
 }
 
 .ptab-image {
-  border-radius: 12px;
+  border-radius: 16px;
   overflow: hidden;
   background: rgba(0,0,0,0.2);
   display: flex;
