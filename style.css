@@ -1092,16 +1092,21 @@ ul { list-style: none; }
 }
 .ptab-stage[data-bg="0"] .ptab-bg,
 .projects-tabs[data-active="0"] .ptab-bg {
+  background: radial-gradient(ellipse at 20% 60%, rgba(255,160,80,0.28) 0%, transparent 65%),
+              radial-gradient(ellipse at 80% 30%, rgba(124,111,255,0.15) 0%, transparent 55%),
+              var(--color-surface);
+}
+.projects-tabs[data-active="1"] .ptab-bg {
   background: radial-gradient(ellipse at 20% 60%, rgba(124,111,255,0.35) 0%, transparent 65%),
               radial-gradient(ellipse at 80% 30%, rgba(96,200,255,0.15) 0%, transparent 55%),
               var(--color-surface);
 }
-.projects-tabs[data-active="1"] .ptab-bg {
+.projects-tabs[data-active="2"] .ptab-bg {
   background: radial-gradient(ellipse at 15% 70%, rgba(96,200,255,0.35) 0%, transparent 65%),
               radial-gradient(ellipse at 85% 25%, rgba(45,212,191,0.15) 0%, transparent 55%),
               var(--color-surface);
 }
-.projects-tabs[data-active="2"] .ptab-bg {
+.projects-tabs[data-active="3"] .ptab-bg {
   background: radial-gradient(ellipse at 25% 55%, rgba(45,212,191,0.35) 0%, transparent 65%),
               radial-gradient(ellipse at 75% 35%, rgba(96,200,255,0.12) 0%, transparent 55%),
               var(--color-surface);
@@ -1142,6 +1147,20 @@ ul { list-style: none; }
 }
 .ptab-image--contain img {
   object-fit: contain;
+}
+.ptab-image--empty {
+  background: rgba(255,255,255,0.04);
+  border: 1px dashed rgba(255,255,255,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ptab-image--empty::after {
+  content: 'imagen próximamente';
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.2);
+  font-family: monospace;
+  letter-spacing: 0.05em;
 }
 
 .ptab-info {
