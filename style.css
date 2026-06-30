@@ -123,6 +123,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%; /* Prevents iOS font scaling on orientation change */
   font-size: 16px;
   overflow-x: hidden; /* Previene scroll horizontal en toda la página */
 }
@@ -1054,25 +1055,87 @@ ul { list-style: none; }
 }
 .ptab-btn {
   background: transparent;
-  border: 1px solid rgba(255,255,255,0.12);
-  color: rgba(255,255,255,0.45);
+  border: 1px solid rgba(255,255,255,0.14);
+  color: rgba(255,255,255,0.55);
   padding: 0.55rem 1.2rem;
   border-radius: 100px;
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.03em;
   cursor: pointer;
-  transition: background 0.25s, border-color 0.25s, color 0.25s;
+  transition: background 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
   white-space: nowrap;
 }
 .ptab-btn:hover {
-  color: rgba(255,255,255,0.8);
-  border-color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.9);
 }
 .ptab-btn.active {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.35);
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.45);
   color: #fff;
+}
+/* color glow por tab */
+.ptab-btn[data-tab="0"] {
+  border-color: rgba(255,160,80,0.4);
+  box-shadow: 0 0 10px rgba(255,160,80,0.15);
+}
+.ptab-btn[data-tab="0"]:hover,
+.ptab-btn[data-tab="0"].active {
+  border-color: rgba(255,160,80,0.75);
+  box-shadow: 0 0 18px rgba(255,160,80,0.3);
+  color: #fff;
+}
+.ptab-btn[data-tab="1"] {
+  border-color: rgba(124,111,255,0.4);
+  box-shadow: 0 0 10px rgba(124,111,255,0.15);
+}
+.ptab-btn[data-tab="1"]:hover,
+.ptab-btn[data-tab="1"].active {
+  border-color: rgba(124,111,255,0.75);
+  box-shadow: 0 0 18px rgba(124,111,255,0.3);
+  color: #fff;
+}
+.ptab-btn[data-tab="2"] {
+  border-color: rgba(96,200,255,0.4);
+  box-shadow: 0 0 10px rgba(96,200,255,0.15);
+}
+.ptab-btn[data-tab="2"]:hover,
+.ptab-btn[data-tab="2"].active {
+  border-color: rgba(96,200,255,0.75);
+  box-shadow: 0 0 18px rgba(96,200,255,0.3);
+  color: #fff;
+}
+.ptab-btn[data-tab="3"] {
+  border-color: rgba(45,212,191,0.4);
+  box-shadow: 0 0 10px rgba(45,212,191,0.15);
+}
+.ptab-btn[data-tab="3"]:hover,
+.ptab-btn[data-tab="3"].active {
+  border-color: rgba(45,212,191,0.75);
+  box-shadow: 0 0 18px rgba(45,212,191,0.3);
+  color: #fff;
+}
+/* contorno pulse en tabs inactivas */
+.ptab-btn[data-tab="0"]:not(.active) { animation: pulse-orange 2s ease-in-out infinite; }
+.ptab-btn[data-tab="1"]:not(.active) { animation: pulse-purple 2s ease-in-out infinite; }
+.ptab-btn[data-tab="2"]:not(.active) { animation: pulse-blue   2s ease-in-out infinite; }
+.ptab-btn[data-tab="3"]:not(.active) { animation: pulse-teal   2s ease-in-out infinite; }
+
+@keyframes pulse-orange {
+  0%, 100% { box-shadow: none; border-color: rgba(255,160,80,0.2); }
+  50%       { box-shadow: 0 0 6px rgba(255,160,80,0.2); border-color: rgba(255,160,80,0.45); }
+}
+@keyframes pulse-purple {
+  0%, 100% { box-shadow: none; border-color: rgba(124,111,255,0.2); }
+  50%       { box-shadow: 0 0 6px rgba(124,111,255,0.2); border-color: rgba(124,111,255,0.45); }
+}
+@keyframes pulse-blue {
+  0%, 100% { box-shadow: none; border-color: rgba(96,200,255,0.2); }
+  50%       { box-shadow: 0 0 6px rgba(96,200,255,0.2); border-color: rgba(96,200,255,0.45); }
+}
+@keyframes pulse-teal {
+  0%, 100% { box-shadow: none; border-color: rgba(45,212,191,0.2); }
+  50%       { box-shadow: 0 0 6px rgba(45,212,191,0.2); border-color: rgba(45,212,191,0.45); }
 }
 
 /* Stage with animated background */
@@ -1085,6 +1148,7 @@ ul { list-style: none; }
 .ptab-bg {
   position: absolute;
   inset: 0;
+  will-change: background;
   transition: background 0.7s cubic-bezier(0.4,0,0.2,1);
   background: radial-gradient(ellipse at 20% 60%, rgba(124,111,255,0.35) 0%, transparent 65%),
               radial-gradient(ellipse at 80% 30%, rgba(96,200,255,0.15) 0%, transparent 55%),
@@ -2924,8 +2988,27 @@ body {
   .cert-badge-link,
   .carousel-btn,
   .theme-toggle,
-  .nav-toggle {
+  .nav-toggle,
+  .ptab-btn {
     min-height: 44px;
+  }
+
+  /* ptab-nav: horizontal scroll on very small screens */
+  .ptab-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+  }
+  .ptab-nav::-webkit-scrollbar { display: none; }
+
+  /* Disable tab pulse animations on mobile — saves battery */
+  .ptab-btn[data-tab="0"]:not(.active),
+  .ptab-btn[data-tab="1"]:not(.active),
+  .ptab-btn[data-tab="2"]:not(.active),
+  .ptab-btn[data-tab="3"]:not(.active) {
+    animation: none;
   }
 
   /* Fluid cursor canvas hidden on touch devices */
@@ -2981,6 +3064,7 @@ body {
 
 /* Reduce motion for users who prefer it (accessibility + battery) */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
