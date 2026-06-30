@@ -6,6 +6,12 @@
 history.scrollRestoration = 'manual';
 window.scrollTo(0, 0);
 
+// Debounce utility — prevents canvas resize flood on zoom/resize events
+function debounce(fn, ms) {
+  let t;
+  return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), ms); };
+}
+
 // ===== 1. TOGGLE DARK / LIGHT MODE =====
 // Guarda la preferencia en localStorage para que se recuerde al recargar
 
@@ -536,7 +542,7 @@ if (yearEl) {
     canvas.height = canvas.offsetHeight;
   }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', debounce(resize, 150));
 
   const waves = [
     { amp: 38, freq: 0.008, speed: 0.018, phase: 0,   yRatio: 0.55, color: '0,180,255',  lw: 1.8 },
@@ -591,7 +597,7 @@ if (yearEl) {
 
   function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', debounce(resize, 150));
 
   let mouse  = { x: -200, y: -200 };
   let isHovering = false;
@@ -654,7 +660,7 @@ if (yearEl) {
   const ctx = canvas.getContext('2d');
   function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
   resize();
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', debounce(resize, 150));
   const W = () => canvas.width;
   const H = () => canvas.height;
 

@@ -3339,13 +3339,32 @@ body {
 }
 
 /* ===== DOWNLOAD CV BTN ===== */
-.btn-cv {
-  background: var(--btn-cv-bg);
-  color: var(--btn-cv-color);
-  border-color: var(--btn-cv-border);
+
+/* ===== PTAB LIGHT MODE ===== */
+[data-theme="light"] .ptab-btn {
+  color: rgba(0,0,0,0.6);
 }
-.btn-cv:hover {
-  background: var(--color-accent);
-  color: #fff;
-  border-color: var(--color-accent);
-}
+[data-theme="light"] .ptab-tag             { color: rgba(0,0,0,0.5) !important; }
+[data-theme="light"] .ptab-info h3         { color: rgba(0,0,0,0.88) !important; }
+[data-theme="light"] .ptab-info p          { color: rgba(0,0,0,0.7) !important; }
+[data-theme="light"] .ptab-info p strong   { color: rgba(0,0,0,0.88) !important; }
+[data-theme="light"] .ptab-award           { color: rgba(0,0,0,0.65) !important; }
+[data-theme="light"] .ptab-award strong    { color: rgba(0,0,0,0.75) !important; }
+[data-theme="light"] .ptab-link            { color: rgba(30,100,180,0.9); }
+[data-theme="light"] .ptab-link:hover      { color: rgba(30,100,180,1); text-shadow: 0 0 8px rgba(30,100,180,0.3); }
+[data-theme="light"] .ptab-btn:hover { color: rgba(0,0,0,0.9); }
+[data-theme="light"] .ptab-btn.active { color: rgba(0,0,0,0.9); }
+
+[data-theme="light"] .ptab-btn[data-tab="0"] { background: rgba(220,100,20,0.1);  border-color: rgba(220,100,20,0.45); }
+[data-theme="light"] .ptab-btn[data-tab="1"] { background: rgba(100,80,220,0.1);  border-color: rgba(100,80,220,0.4); }
+[data-theme="light"] .ptab-btn[data-tab="2"] { background: rgba(30,140,200,0.1);  border-color: rgba(30,140,200,0.4); }
+[data-theme="light"] .ptab-btn[data-tab="3"] { background: rgba(20,160,140,0.1);  border-color: rgba(20,160,140,0.4); }
+
+[data-theme="light"] .ptab-btn[data-tab="0"]:hover,
+[data-theme="light"] .ptab-btn[data-tab="0"].active { background: rgba(220,100,20,0.18); border-color: rgba(220,100,20,0.7);  box-shadow: 0 0 12px rgba(220,100,20,0.2); }
+[data-theme="light"] .ptab-btn[data-tab="1"]:hover,
+[data-theme="light"] .ptab-btn[data-tab="1"].active { background: rgba(100,80,220,0.18); border-color: rgba(100,80,220,0.65); box-shadow: 0 0 12px rgba(100,80,220,0.18); }
+[data-theme="light"] .ptab-btn[data-tab="2"]:hover,
+[data-theme="light"] .ptab-btn[data-tab="2"].active { background: rgba(30,140,200,0.18); border-color: rgba(30,140,200,0.65); box-shadow: 0 0 12px rgba(30,140,200,0.18); }
+[data-theme="light"] .ptab-btn[data-tab="3"]:hover,
+[data-theme="light"] .ptab-btn[data-tab="3"].active { background: rgba(20,160,140,0.18); border-color: rgba(20,160,140,0.65); box-shadow: 0 0 12px rgba(20,160,140,0.18); }
