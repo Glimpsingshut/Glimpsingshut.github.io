@@ -1594,8 +1594,8 @@ ul { list-style: none; }
   }
 
   .carousel-btn {
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     font-size: 0.9rem;
   }
 }
@@ -2986,11 +2986,16 @@ body {
   .btn,
   .contact-card,
   .cert-badge-link,
-  .carousel-btn,
   .theme-toggle,
   .nav-toggle,
   .ptab-btn {
     min-height: 44px;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+    min-height: 0;
   }
 
   /* ptab-nav: horizontal scroll on very small screens */
