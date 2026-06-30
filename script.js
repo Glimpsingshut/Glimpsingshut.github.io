@@ -825,9 +825,14 @@ if (yearEl) {
     });
   }
 
-  // Navbar Contact link
+  function scrollToContact(e) {
+    e.preventDefault();
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Navbar Contact link — scrolls to section
   document.querySelectorAll('.nav-links a[href="#contact"]').forEach(btn => {
-    btn.addEventListener('click', copyEmail);
+    btn.addEventListener('click', scrollToContact);
   });
 
   // Email card in contact section
