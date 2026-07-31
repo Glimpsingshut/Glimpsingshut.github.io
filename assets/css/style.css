@@ -2987,13 +2987,13 @@ body {
   .btn,
   .contact-card,
   .cert-badge-link,
-  .theme-toggle,
-  .nav-toggle,
   .ptab-btn {
     min-height: 44px;
   }
 
-  .carousel-btn {
+  .carousel-btn,
+  .theme-toggle,
+  .nav-toggle {
     width: 44px;
     height: 44px;
     min-height: 0;
