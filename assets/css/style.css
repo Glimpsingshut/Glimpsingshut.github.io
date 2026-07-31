@@ -484,7 +484,7 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem var(--space-lg);
+  padding: calc(1.25rem + env(safe-area-inset-top)) var(--space-lg) 1.25rem;
   background: var(--navbar-bg);
   backdrop-filter: blur(12px);       /* Efecto de vidrio esmerilado */
   -webkit-backdrop-filter: blur(12px);
