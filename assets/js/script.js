@@ -16,6 +16,7 @@ function debounce(fn, ms) {
 // Guarda la preferencia en localStorage para que se recuerde al recargar
 
 const themeToggle = document.getElementById('themeToggle');
+const themeToggleMobile = document.getElementById('themeToggleMobile');
 const html = document.documentElement;
 
 // Al cargar, revisa si el usuario ya eligió un tema antes
@@ -31,13 +32,16 @@ function applyFluidTheme(theme) {
   }
 }
 
-themeToggle?.addEventListener('click', () => {
+function toggleTheme() {
   const current = html.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
   html.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   applyFluidTheme(next);
-});
+}
+
+themeToggle?.addEventListener('click', toggleTheme);
+themeToggleMobile?.addEventListener('click', toggleTheme);
 
 
 

@@ -649,6 +649,9 @@ ul { list-style: none; }
   transform: scale(1.08);
 }
 
+/* Menu theme item hidden on desktop */
+.nav-theme-item { display: none; }
+
 /* Icono según el tema activo */
 .theme-toggle { position: relative; }
 .theme-toggle::after {
@@ -2440,6 +2443,28 @@ ul { list-style: none; }
   /* ── Navbar ── */
   .navbar {
     padding: 1rem var(--space-sm);
+  }
+
+  /* Desktop theme toggle hidden on mobile — moved into dropdown */
+  .theme-toggle:not(.theme-toggle--menu) {
+    display: none;
+  }
+
+  /* Theme toggle inside dropdown menu */
+  .nav-theme-item {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 0;
+    border-top: 1px solid var(--color-border);
+    margin-top: 0.25rem;
+    width: 100%;
+  }
+
+  .theme-toggle--menu {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    min-height: 0;
   }
 
   .nav-toggle {
