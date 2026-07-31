@@ -490,6 +490,9 @@ ul { list-style: none; }
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
   transition: padding var(--transition);
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* Logo / inicial en la navbar */
